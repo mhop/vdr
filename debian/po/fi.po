@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the vdr package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vdr\n"
+"Report-Msgid-Bugs-To: vdr@packages.debian.org\n"
+"POT-Creation-Date: 2017-01-31 23:41+0200\n"
+"PO-Revision-Date: 2017-01-31 23:45+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: antti.jarvinen@katiska.org\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Satellite"
+msgstr "Satelliitti"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Terrestrial"
+msgstr "Antennilähetys"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Cable"
+msgstr "Kaapeli"
+
+#. Type: select
+#. Description
+#: ../vdr.templates:1002
+msgid "DVB card type:"
+msgstr "DVB-kortin tyyppi:"
+
+#. Type: select
+#. Description
+#: ../vdr.templates:1002
+msgid ""
+"VDR needs to know your DVB card type to work correctly. Using your "
+"selection, a channels.conf file will be installed to /var/lib/vdr.  You may "
+"have to change this file depending on your setup."
+msgstr ""
+"VDR-ohjelman pitää tietää DVB-korttisi tyypin, jotta se toimisi oikein. "
+"Valintasi perusteella tiedosto channels.conf tullaan asentamaan "
+"hakemistoon /var/lib/vdr. Muuta tiedostoa laitteistosi mukaiseksi."
+
+#. Type: boolean
+#. Description
+#: ../vdr.templates:2001
+msgid "Create /var/lib/video?"
+msgstr "Luodaanko hakemisto /var/lib/video?"
+
+#. Type: boolean
+#. Description
+#: ../vdr.templates:2001
+msgid ""
+"By default VDR is configured to use /var/lib/video to store recordings. You "
+"can either create this directory now, or change this behavior later  by "
+"modifying the config file /etc/vdr/conf.d/00-vdr.conf."
+msgstr ""
+"Oletuksena hakemistoa /var/lib/video käytetään tallenteiden tallettamiseen. "
+"Voit luoda hakemiston nyt tai muuttaa käyttäytymistä myöhemmin muuttamalla "
+"tiedostoa /etc/vdr/conf.d/00-vdr.conf."

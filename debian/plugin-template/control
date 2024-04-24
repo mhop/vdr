@@ -1,0 +1,15 @@
+Source: #PACKAGE#
+Section: video
+Priority: optional
+Maintainer: #USERNAME# <#EMAIL#>
+Build-Depends: #BUILD_DEPS#, vdr-dev (>= #VDRVERSION#), gettext
+Standards-Version: #POLICY#
+Vcs-Git: https://salsa.debian.org/vdr-team/#PACKAGE#.git
+Vcs-Browser: https://salsa.debian.org/vdr-team/#PACKAGE#
+Homepage: <url://example.com>
+
+Package: #PACKAGE#
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${vdr:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

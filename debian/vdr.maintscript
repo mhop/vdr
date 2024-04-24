@@ -1,0 +1,1 @@
+rm_conffile /etc/vdr/plugins/order.conf 2.2.0-1

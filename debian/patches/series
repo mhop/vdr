@@ -1,0 +1,9 @@
+04_newplugin.patch
+12_osdbase-maxitems.patch
+
+99_ncursesw-include.patch
+skincurses-log-errors.patch
+allow-verbose-libsi-build.patch
+use-cpp-flags.patch
+configurable-pkg-config.patch
+glibc-2.31-no-stime.patch

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+. /usr/lib/vdr/config-loader.sh
+
+VDR_ENV="LANG=$VDR_LANG LC_ALL=$VDR_LANG"
+
+VDRCMD="$VDR_ENV /usr/bin/vdr $*"
+
+VDR_ERR=`mktemp -p /tmp vdr-err.XXXXXX`
+
+while (true) do
+    eval $VDRCMD >/dev/null 2>"$VDR_ERR"
+
+    case $? in
+        0)
+            exit
+        ;;
+        2)
+            ERROR=`cat "$VDR_ERR"`
+            logger -t runvdr "stopping after fatal fail ($ERROR)"
+            exit
+        ;;
+    esac
+
+    logger -t runvdr "restarting VDR"
+done

@@ -1,0 +1,73 @@
+# Vietnamese translations for vdr package
+# Bản dịch tiếng Việt dành cho gói vdr.
+# This file is distributed under the same license as the vdr package.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vdr 2.2.0-6\n"
+"Report-Msgid-Bugs-To: vdr@packages.debian.org\n"
+"POT-Creation-Date: 2017-01-31 22:00+0100\n"
+"PO-Revision-Date: 2017-02-01 10:27+0700\n"
+"Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
+"Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Satellite"
+msgstr "Vệ tinh"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Terrestrial"
+msgstr "Mặt đất"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Cable"
+msgstr "Cáp"
+
+#. Type: select
+#. Description
+#: ../vdr.templates:1002
+msgid "DVB card type:"
+msgstr "Kiểu thẻ DVB:"
+
+#. Type: select
+#. Description
+#: ../vdr.templates:1002
+msgid ""
+"VDR needs to know your DVB card type to work correctly. Using your "
+"selection, a channels.conf file will be installed to /var/lib/vdr.  You may "
+"have to change this file depending on your setup."
+msgstr ""
+"VDR cầm biết kiểu thẻ DVB của bạn để có thể làm việc đúng. Để sử dụng cái "
+"bạn chọn, một tập tin channels.conf sẽ được cài đặt vào /var/lib/vdr. Bạn có "
+"lẽ phải thay đổi tập tin này tùy thuộc vào cài đặt của bạn."
+
+#. Type: boolean
+#. Description
+#: ../vdr.templates:2001
+msgid "Create /var/lib/video?"
+msgstr "Tạo /var/lib/video?"
+
+#. Type: boolean
+#. Description
+#: ../vdr.templates:2001
+msgid ""
+"By default VDR is configured to use /var/lib/video to store recordings. You "
+"can either create this directory now, or change this behavior later  by "
+"modifying the config file /etc/vdr/conf.d/00-vdr.conf."
+msgstr ""
+"Theo mặc định VDR được cấu hình dùng /var/lib/video để lưu phần ghi lại. Bạn "
+"hoặc là có thể tạo thư mục này ngay bây giờ, hoặc là thay đổi lối hành xử "
+"này sau bằng cách chỉnh sửa tập tin cấu hình /etc/vdr/conf.d/00-vdr.conf."

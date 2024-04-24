@@ -1,0 +1,72 @@
+# Danish translation vdr.
+# Copyright (C) 2017 vdr & nedenstående oversættere.
+# This file is distributed under the same license as the vdr package.
+# Joe Hansen (joedalton2@yahoo.dk), 2010, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vdr\n"
+"Report-Msgid-Bugs-To: vdr@packages.debian.org\n"
+"POT-Creation-Date: 2017-01-31 22:00+0100\n"
+"PO-Revision-Date: 2017-02-04 17:30+01:00\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Satellite"
+msgstr "Satellit"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Terrestrial"
+msgstr "Terrestrisk"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Cable"
+msgstr "Kabel"
+
+#. Type: select
+#. Description
+#: ../vdr.templates:1002
+msgid "DVB card type:"
+msgstr "DVB-korttype:"
+
+#. Type: select
+#. Description
+#: ../vdr.templates:1002
+msgid ""
+"VDR needs to know your DVB card type to work correctly. Using your "
+"selection, a channels.conf file will be installed to /var/lib/vdr.  You may "
+"have to change this file depending on your setup."
+msgstr ""
+"VDR skal kende din DVB-korttype for at fungere korrekt. Filen channels.conf "
+"vil med dine valg blive installeret i /var/lib/vdr. Du skal måske ændre "
+"denne fil afhængig af din opsætning."
+
+#. Type: boolean
+#. Description
+#: ../vdr.templates:2001
+msgid "Create /var/lib/video?"
+msgstr "Opret /var/lib/video?"
+
+#. Type: boolean
+#. Description
+#: ../vdr.templates:2001
+msgid ""
+"By default VDR is configured to use /var/lib/video to store recordings. You "
+"can either create this directory now, or change this behavior later  by "
+"modifying the config file /etc/vdr/conf.d/00-vdr.conf."
+msgstr ""
+"Som standard er VDR konfigureret til at bruge /var/lib/video til at gemme "
+"optagelser. Du kan enten oprette denne mappe nu, eller ændre denne opførsel "
+"senere ved at ændre konfigurationsfilen /etc/vdr/conf.d/00-vdr.conf."
+

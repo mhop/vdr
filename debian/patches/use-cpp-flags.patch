@@ -1,0 +1,207 @@
+--- a/Makefile
++++ b/Makefile
+@@ -131,11 +131,11 @@
+ 
+ %.o: %.c
+ 	@echo CC $@
+-	$(Q)$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
++	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+ 
+ # Dependencies:
+ 
+-MAKEDEP = $(CXX) -MM -MG
++MAKEDEP = $(CXX) $(CPPFLAGS) -MM -MG
+ DEPFILE = .dependencies
+ $(DEPFILE): Makefile
+ 	@$(MAKEDEP) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
+@@ -146,7 +146,7 @@
+ 
+ vdr: $(OBJS) $(SILIB)
+ 	@echo LD $@
+-	$(Q)$(CXX) $(CXXFLAGS) -rdynamic $(LDFLAGS) $(OBJS) $(LIBS) $(SILIB) -o vdr
++	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -rdynamic $(LDFLAGS) $(OBJS) $(LIBS) $(SILIB) -o vdr
+ 
+ # The libsi library:
+ 
+--- a/PLUGINS/src/epgtableid0/Makefile
++++ b/PLUGINS/src/epgtableid0/Makefile
+@@ -62,14 +62,14 @@
+ 
+ %.o: %.c
+ 	@echo CC $@
+-	$(Q)$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
++	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+ 
+ ### Dependencies:
+ 
+ MAKEDEP = $(CXX) -MM -MG
+ DEPFILE = .dependencies
+ $(DEPFILE): Makefile
+-	@$(MAKEDEP) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
++	@$(MAKEDEP) $(CPPFLAGS) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
+ 
+ -include $(DEPFILE)
+ 
+--- a/PLUGINS/src/hello/Makefile
++++ b/PLUGINS/src/hello/Makefile
+@@ -63,14 +63,14 @@
+ 
+ %.o: %.c
+ 	@echo CC $@
+-	$(Q)$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
++	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+ 
+ ### Dependencies:
+ 
+ MAKEDEP = $(CXX) -MM -MG
+ DEPFILE = .dependencies
+ $(DEPFILE): Makefile
+-	@$(MAKEDEP) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
++	@$(MAKEDEP) $(CPPFLAGS) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
+ 
+ -include $(DEPFILE)
+ 
+--- a/PLUGINS/src/osddemo/Makefile
++++ b/PLUGINS/src/osddemo/Makefile
+@@ -62,14 +62,14 @@
+ 
+ %.o: %.c
+ 	@echo CC $@
+-	$(Q)$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
++	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+ 
+ ### Dependencies:
+ 
+ MAKEDEP = $(CXX) -MM -MG
+ DEPFILE = .dependencies
+ $(DEPFILE): Makefile
+-	@$(MAKEDEP) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
++	@$(MAKEDEP) $(CPPFLAGS) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
+ 
+ -include $(DEPFILE)
+ 
+--- a/PLUGINS/src/pictures/Makefile
++++ b/PLUGINS/src/pictures/Makefile
+@@ -63,14 +63,14 @@
+ 
+ %.o: %.c
+ 	@echo CC $@
+-	$(Q)$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
++	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+ 
+ ### Dependencies:
+ 
+ MAKEDEP = $(CXX) -MM -MG
+ DEPFILE = .dependencies
+ $(DEPFILE): Makefile
+-	@$(MAKEDEP) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
++	@$(MAKEDEP) $(CPPFLAGS) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
+ 
+ -include $(DEPFILE)
+ 
+--- a/PLUGINS/src/servicedemo/Makefile
++++ b/PLUGINS/src/servicedemo/Makefile
+@@ -59,14 +59,14 @@
+ 
+ %.o: %.c
+ 	@echo CC $@
+-	$(Q)$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
++	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+ 
+ ### Dependencies:
+ 
+ MAKEDEP = $(CXX) -MM -MG
+ DEPFILE = .dependencies
+ $(DEPFILE): Makefile
+-	@$(MAKEDEP) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
++	@$(MAKEDEP $(CPPFLAGS)) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
+ 
+ -include $(DEPFILE)
+ 
+--- a/PLUGINS/src/skincurses/Makefile
++++ b/PLUGINS/src/skincurses/Makefile
+@@ -63,14 +63,14 @@
+ 
+ %.o: %.c
+ 	@echo CC $@
+-	$(Q)$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
++	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+ 
+ ### Dependencies:
+ 
+ MAKEDEP = $(CXX) -MM -MG
+ DEPFILE = .dependencies
+ $(DEPFILE): Makefile
+-	@$(MAKEDEP) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
++	@$(MAKEDEP) $(CPPFLAGS) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
+ 
+ -include $(DEPFILE)
+ 
+--- a/PLUGINS/src/status/Makefile
++++ b/PLUGINS/src/status/Makefile
+@@ -62,14 +62,14 @@
+ 
+ %.o: %.c
+ 	@echo CC $@
+-	$(Q)$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
++	$(Q)$(CXX) $(CPPFLAGS) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+ 
+ ### Dependencies:
+ 
+ MAKEDEP = $(CXX) -MM -MG
+ DEPFILE = .dependencies
+ $(DEPFILE): Makefile
+-	@$(MAKEDEP) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
++	@$(MAKEDEP) $(CPPFLAGS) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
+ 
+ -include $(DEPFILE)
+ 
+--- a/PLUGINS/src/svdrpdemo/Makefile
++++ b/PLUGINS/src/svdrpdemo/Makefile
+@@ -62,14 +62,14 @@
+ 
+ %.o: %.c
+ 	@echo CC $@
+-	$(Q)$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
++	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+ 
+ ### Dependencies:
+ 
+ MAKEDEP = $(CXX) -MM -MG
+ DEPFILE = .dependencies
+ $(DEPFILE): Makefile
+-	@$(MAKEDEP) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
++	@$(MAKEDEP) $(CPPFLAGS) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
+ 
+ -include $(DEPFILE)
+ 
+--- a/libsi/Makefile
++++ b/libsi/Makefile
+@@ -28,7 +28,7 @@
+ 
+ %.o: %.c
+ 	@echo CC libsi/$@
+-	$(Q)$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
++	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+ 
+ ### Dependencies:
+ 
+--- a/newplugin
++++ b/newplugin
+@@ -122,14 +122,14 @@
+ 
+ %.o: %.c
+ 	\@echo CC \$\@
+-	\$(Q)\$(CXX) \$(CXXFLAGS) -c \$(DEFINES) \$(INCLUDES) -o \$\@ \$<
++	\$(Q)\$(CXX) \$(CPPFLAGS) \$(CXXFLAGS) -c \$(DEFINES) \$(INCLUDES) -o \$\@ \$<
+ 
+ ### Dependencies:
+ 
+ MAKEDEP = \$(CXX) -MM -MG
+ DEPFILE = .dependencies
+ \$(DEPFILE): Makefile
+-	\@\$(MAKEDEP) \$(CXXFLAGS) \$(DEFINES) \$(INCLUDES) \$(OBJS:%.o=%.c) > \$\@
++	\@\$(MAKEDEP) \$(CPPFLAGS) \$(CXXFLAGS) \$(DEFINES) \$(INCLUDES) \$(OBJS:%.o=%.c) > \$\@
+ 
+ -include \$(DEPFILE)
+ 
