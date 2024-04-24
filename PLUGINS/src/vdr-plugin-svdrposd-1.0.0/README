@@ -1,0 +1,30 @@
+This is a "plugin" for the Video Disk Recorder (VDR).
+
+Written by:                  Frank Schmirler <vdrdev@schmirler.de>
+
+Project's homepage:          http://vdr.schmirler.de/
+
+Latest version available at: http://vdr.schmirler.de/
+
+See the file COPYING for license information.
+
+Description:
+------------
+Make contents of OSD menu available via SVDRP
+
+Required by the remoteosd-plugin
+
+Command overview:
+-----------------
+All the OSD commands return the current contents of the OSD as indicated
+by the VDR status interface. On success the response code is 920. If
+the requested information is currently unavailable (e.g. OSD is closed)
+930 is returned.
+
+The following OSD commands are available:
+- OSDT                  title
+- OSDI [items_per_page] list of items
+- OSDX                  text block
+- OSDH                  color button titles
+- OSDM                  message / status line
+- LSTO [items_per_page] show all of the above

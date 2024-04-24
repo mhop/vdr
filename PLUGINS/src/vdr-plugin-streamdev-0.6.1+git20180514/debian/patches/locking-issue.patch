@@ -1,0 +1,15 @@
+Description: Remove thread locking form cStreamdevDevice::SetPid() implementation
+Origin: https://www.vdr-portal.de/forum/index.php?thread/131708-gel%C3%B6st-vdr-2-3-9-h%C3%A4ngt-bei-der-wiedergabe-von-aufnahmen-mit-rpihddevice/&postID=1303098#post1303098
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/client/device.c
++++ b/client/device.c
+@@ -188,8 +188,6 @@
+ 
+ bool cStreamdevDevice::SetPid(cPidHandle *Handle, int Type, bool On) {
+ 	Dprintf("SetPid, Pid=%d, Type=%d, On=%d, used=%d\n", Handle->pid, Type, On, Handle->used);
+-	LOCK_THREAD;
+-
+ 	bool res = true; 
+ 	if (Handle->pid && (On || !Handle->used)) {
+ 		res = m_ClientSocket->SetPid(Handle->pid, On);

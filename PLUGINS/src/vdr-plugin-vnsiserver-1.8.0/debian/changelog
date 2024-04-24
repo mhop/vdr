@@ -1,0 +1,105 @@
+vdr-plugin-vnsiserver (1:1.8.0-3build1) focal; urgency=medium
+
+  * No-change rebuild for libgcc-s1 package name change.
+
+ -- Matthias Klose <doko@ubuntu.com>  Sun, 22 Mar 2020 17:02:07 +0100
+
+vdr-plugin-vnsiserver (1:1.8.0-3) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * Bump Standards-Version to 4.4.1
+
+ -- Tobias Grimm <etobi@debian.org>  Fri, 01 Nov 2019 15:20:49 +0100
+
+vdr-plugin-vnsiserver (1:1.8.0-2) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * Use debhelper-compat instead of debian/compat
+  * Bump Standards-Version to 4.4.0
+
+  [ Tobias Grimm ]
+  * Build-depend on vdr-dev >= 2.4.1
+
+ -- Tobias Grimm <etobi@debian.org>  Sat, 20 Jul 2019 11:05:44 +0200
+
+vdr-plugin-vnsiserver (1:1.8.0-1) unstable; urgency=medium
+
+  * New upstream version 1.8.0
+  * Standards-Version: 4.3.0
+  * Dropped vdr-plugin-vnsiserver-dbg - migration to automatically created debug
+    symbol package
+  * Use debhelper / compatibility level 10
+
+ -- Tobias Grimm <etobi@debian.org>  Mon, 06 May 2019 05:41:24 +0200
+
+vdr-plugin-vnsiserver (1:1.6.0-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Tobias Grimm <etobi@debian.org>  Wed, 30 May 2018 22:52:13 +0200
+
+vdr-plugin-vnsiserver (1:1.5.2-3) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/copyright: Use https protocol in Format field
+  * d/control: Deprecating priority extra as per policy 4.0.1
+  * d/control: Set Vcs-* to salsa.debian.org
+
+  [ Tobias Grimm ]
+  * Build-depend on vdr-dev (>= 2.4.0)
+
+ -- Tobias Grimm <etobi@debian.org>  Mon, 16 Apr 2018 10:35:14 +0200
+
+vdr-plugin-vnsiserver (1:1.5.2-2) unstable; urgency=medium
+
+  * Build-depend on vdr-dev >= 2.3.8
+
+ -- Tobias Grimm <etobi@debian.org>  Sat, 26 Aug 2017 10:17:16 +0200
+
+vdr-plugin-vnsiserver (1:1.5.2-1) unstable; urgency=medium
+
+  * New upstream version + patches from upstream git up to SHA 2c42df3
+
+ -- Tobias Grimm <etobi@debian.org>  Sun, 25 Jun 2017 16:06:54 +0200
+
+vdr-plugin-vnsiserver (1:1.5.1-1) unstable; urgency=medium
+
+  * New upstream version 1.5.1
+  * Standards-Version: 3.9.8
+  * Dropped obsolete patches
+
+ -- Tobias Grimm <etobi@debian.org>  Sat, 05 Nov 2016 00:25:38 +0100
+
+vdr-plugin-vnsiserver (1:1.3.1-2) unstable; urgency=medium
+
+  * Fixing FTBFS with GCC 6 (Closes: #811949)
+
+ -- Tobias Grimm <etobi@debian.org>  Sat, 23 Jan 2016 21:54:30 +0100
+
+vdr-plugin-vnsiserver (1:1.3.1-1) unstable; urgency=medium
+
+  * Fixed Vcs-Git to point to anonscm.debian.org
+  * Added upstream patch to fix issue with RAM time shift
+
+ -- Tobias Grimm <etobi@debian.org>  Sun, 01 Nov 2015 20:04:57 +0100
+
+vdr-plugin-vnsiserver (1:1.2.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Removed upstream bug fix patches
+  * Added vdr-plugin-vnsiserver-dbg for debugging symbols
+  * Added Tobias Grimm to uploaders
+  * Added more details to debian/copyright
+  * Updated upstream homepage in debian/copyright
+  * Improved package description
+
+ -- Tobias Grimm <etobi@debian.org>  Tue, 22 Sep 2015 01:10:34 +0200
+
+vdr-plugin-vnsiserver (1:1.2.0-1) unstable; urgency=low
+
+  * Initial release based on xbmc-pvr-addons
+    13.0+git20140512+g91cc731+dfsg1-1 (Closes: #748288)
+  * Use links control file instead of postinst/postrm
+  * Import 4 upstream bug fix patches
+
+ -- Balint Reczey <balint@balintreczey.hu>  Fri, 02 Jan 2015 01:45:33 +0100

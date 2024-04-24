@@ -1,0 +1,52 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: vdr-plugin-vnsiserver
+Source: https://github.com/FernetMenta/vdr-plugin-vnsiserver
+
+Files: *
+Copyright: 2005-2014 Team XBMC (http://www.xbmc.org)
+           2011 Alexander Pipelka
+           2010 Alwin Esch (Team XBMC)
+License: GPL-2+
+
+Files: hash.*
+Copyright: 1986 Gary S. Brown
+           2011 Alexander Pipelka
+Comment: CRC32 code
+License: GPL-2+
+
+Files: requestpacket.* responsepacket.* recplayer.*
+Copyright: 2004, 2005, 2007 Chris Tallon
+           2010 Alwin Esch
+           2010, 2011 Alexander Pipelka
+Comment: Based on the code from the VOMP for VDR plugin
+License: GPL-2+
+
+Files: csocket.*
+Copyright: 2003 - 2006 Petri Hintukainen
+           2010 Alwin Esch (Team XBMC)
+           2011 Alexander Pipelka
+Comment: Based on the code form the Xinelibouput VDR plugin
+License: GPL-2+
+
+Files: debian/*
+Copyright: 2012 wsnipex <wsnipex@xbmc.org>
+           2015 Balint Reczey <balint@balintreczey.hu>
+           2015 Tobias Grimm <etobi@debian.org>
+License: GPL-2+
+
+License: GPL-2+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".

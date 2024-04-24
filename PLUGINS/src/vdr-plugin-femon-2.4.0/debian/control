@@ -1,0 +1,17 @@
+Source: vdr-plugin-femon
+Section: video
+Priority: optional
+Maintainer: Debian VDR Team <pkg-vdr-dvb-devel@lists.alioth.debian.org>
+Uploaders: Tobias Grimm <etobi@debian.org>, Thomas Schmidt <tschmidt@debian.org>, Thomas Günther <tom@toms-cafe.de>
+Build-Depends: debhelper (>= 9), vdr-dev (>= 2.4.1), gettext, pkg-config
+Standards-Version: 4.4.1
+Homepage: http://www.saunalahti.fi/~rahrenbe/vdr/femon/
+Vcs-Git: https://salsa.debian.org/vdr-team/vdr-plugin-femon.git
+Vcs-Browser: https://salsa.debian.org/vdr-team/vdr-plugin-femon
+
+Package: vdr-plugin-femon
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${vdr:Depends}
+Description: DVB frontend status monitor plugin for VDR
+ DVB Frontend Status Monitor (femon) is a VDR plugin that displays
+ signal quality parameters of the tuned channel on the OSD.

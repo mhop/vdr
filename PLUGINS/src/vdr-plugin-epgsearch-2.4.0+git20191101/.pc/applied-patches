@@ -1,0 +1,3 @@
+01_debian-defaults.patch
+02_disable_po_update.patch
+03_fix-docs.patch

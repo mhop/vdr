@@ -1,0 +1,5 @@
+etc/vdr/plugins/epgsearch/epgsearchcmds.conf          var/lib/vdr/plugins/epgsearch/epgsearchcmds.conf
+etc/vdr/plugins/epgsearch/epgsearchmenu.conf          var/lib/vdr/plugins/epgsearch/epgsearchmenu.conf
+etc/vdr/plugins/epgsearch/epgsearchcats.conf          var/lib/vdr/plugins/epgsearch/epgsearchcats.conf
+etc/vdr/plugins/epgsearch/epgsearchupdmail.templ      var/lib/vdr/plugins/epgsearch/epgsearchupdmail.templ
+etc/vdr/plugins/epgsearch/epgsearchconflmail.templ    var/lib/vdr/plugins/epgsearch/epgsearchconflmail.templ

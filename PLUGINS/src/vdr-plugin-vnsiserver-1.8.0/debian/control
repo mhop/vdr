@@ -1,0 +1,21 @@
+Source: vdr-plugin-vnsiserver
+Section: video
+Priority: optional
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Uploaders: Balint Reczey <balint@balintreczey.hu>, Tobias Grimm <etobi@debian.org>
+Build-Depends: debhelper-compat (= 10), pkg-config, vdr-dev (>= 2.4.1)
+Standards-Version: 4.4.1
+Homepage: https://github.com/FernetMenta/vdr-plugin-vnsiserver
+Vcs-Git: https://salsa.debian.org/multimedia-team/vdr-plugin-vnsiserver.git
+Vcs-Browser: https://salsa.debian.org/multimedia-team/vdr-plugin-vnsiserver
+
+Package: vdr-plugin-vnsiserver
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${vdr:Depends}
+Suggests: xbmc (>= 2:12)
+Description: VDR plugin to provide PVR backend services for Kodi
+ The vdr-plugin-vnsiserver provides PVR backend services for Kodi
+ clients using the kodi-pvr-vdr-vnsi addon. Via VNSI
+ (VDR-Network-Streaming-Interface) Kodi connects to this plugin and
+ can access various VDR functions like timers, channels,
+ live-TV-streaming and recordings.

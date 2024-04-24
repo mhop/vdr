@@ -1,0 +1,110 @@
+This is a DVB Frontend Status Monitor plugin for the Video Disk Recorder (VDR).
+
+Written by:                  Rolf Ahrenberg
+                             < R o l f . A h r e n b e r g @ s c i . f i >
+
+Project's homepage:          http://www.saunalahti.fi/~rahrenbe/vdr/femon/
+
+Latest version available at: http://www.saunalahti.fi/~rahrenbe/vdr/femon/
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+See the file COPYING for license information.
+
+Requirements:
+
+VDR and a DVB card.
+
+Description:
+
+DVB Frontend Status Monitor is a plugin that displays some signal information
+parameters of the current tuned channel on OSD. You can zap through all your
+channels and the plugin should be monitoring always the right frontend. The
+transponder and stream information are also available in advanced display modes.
+
+The plugin is based on a neat console frontend status monitor application
+called 'femon' by Johannes Stezenbach (see DVB-apps/szap/femon.c for further
+information).
+
+Terminology:
+
+--------------------------------------------------------------
+|## Channel Name ################### [SVDRP][AR][VF][A/DD][D]|
+|[=====Signal Strength ===================|=================]|
+|[=====Signal Quality ================|=====================]|
+|  STR: 0   CNR: 0   BER: 0   PER: 0   Video: 0   Audio: 0   |
+| [LOCK]     [SIGNAL]     [CARRIER]     [VITERBI]     [SYNC] |
+--------------------------------------------------------------
+
+STR     - Signal strength in dBm
+CNR     - Signal-to-noise ratio of the main carrier in dB
+BER     - Bit error rate after the forward error correction (FEC) done by inner code block
+PER     - Block error rate after the outer forward error correction coding
+Video   - Calculated video bitrate in Mbit/s
+Audio   - Calculated audio / AC-3 bitrate in kbit/s
+
+LOCK    - Everything's working...
+SIGNAL  - Found something above the noise level
+CARRIER - Found a DVB signal
+VITERBI - FEC (forward error correction) is stable
+SYNC    - Found sync bytes
+
+SVDRP   - SVDRP connection active (optional)
+AR      - Aspect Ratio: 1:1/4:3/16:9/2.21:1 (optional)
+VF      - Video format: PAL/NTSC (optional)
+A/DD    - Audio (0..N) / AC-3 track (optional)
+D       - Device number: 0..N (optional)
+
+Controls:
+
+ChanUp/ChanDn - Switch channel up/down
+Up/Down       - Switch channel up/down
+0-9           - Select channel
+Ok            - Switch between display modes: basic, transponder, stream, AC-3
+Green         - Select next audio track
+Yellow        - Select audio channel: stereo, mono left, mono right
+Back          - Exit plugin
+Left/Right    - Switch to next/previous device that provides the current channel
+
+Installation:
+
+tar -xzf /put/your/path/here/vdr-femon-X.Y.Z.tgz
+make -C femon-X.Y.Z install
+
+Client-server architecture:
+
+The SVDRP service extension can be used in client-server configurations.
+A streamdev based VDR-to-VDR streaming client can retrieve frontend
+information from a server, if the SVDRP service has been activated and
+properly configured in femon. The svdrpservice plugin is required on the
+VDR client.
+
+If the client fails to open a DVB card frontend corresponding to the
+current receiving device, it will connect to the SVDRP server, look for
+the femon plugin and tune the channel on the server to the one currently
+viewed on the client. If one of these steps fails, the femon OSD won't
+open on the client. An SVDRP icon in the femon title bar indicates that
+the data source is SVDRP. The device number in the title bar is always
+the local device number.
+
+Notes:
+
+- Disable the stream analyze to speed up heavy zapping sessions.
+
+- The signal strength and signal-to-noise ratio values are comparable only
+  between the same brand/model frontends. Due to the lack of proper frontend
+  specifications those values cannot be calculated into any real units.
+
+- If the OSD isn't visible, you've configured the OSD height too big or too
+  small. Please, try to adjust the variable on the OSD setup page before
+  writing any bug reports.
+
+- If the SVDRP service is used: femon won't notice if the server is tuned
+  to a different channel and tuning the channel on the server might annoy
+  people watching live TV. In some situations the server will refuse
+  switching to the requested channel. On a headless server you can avoid
+  this by installing the dummydevice plugin.
+
+"Femon - A real womon who lives according to her natural feminine inclinations."

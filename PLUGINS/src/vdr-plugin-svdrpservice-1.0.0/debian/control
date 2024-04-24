@@ -1,0 +1,25 @@
+Source: vdr-plugin-svdrpservice
+Section: video
+Priority: optional
+Maintainer: Debian VDR Team <pkg-vdr-dvb-devel@lists.alioth.debian.org>
+Uploaders: Thomas Schmidt <tschmidt@debian.org>, Tobias Grimm <etobi@debian.org>, Thomas Günther <tom@toms-cafe.de>
+Build-Depends: debhelper (>= 9), vdr-dev (>= 2.4.1), pkg-config
+Standards-Version: 4.4.1
+Homepage: http://vdr.schmirler.de
+Vcs-Git: https://salsa.debian.org/vdr-team/vdr-plugin-svdrpservice.git
+Vcs-Browser: https://salsa.debian.org/vdr-team/vdr-plugin-svdrpservice
+
+Package: vdr-plugin-svdrpservice
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${vdr:Depends}
+Description: VDR plugin that provides a SVDRP service for other plugins
+ This VDR plugin offers SVDRP connections as a service to other plugins.
+ Connecting to streamdev's VTP server port is possible too.
+Vcs-Git: https://salsa.debian.org/vdr-team/vdr-plugin-svdrpservice.git
+Vcs-Browser: https://salsa.debian.org/vdr-team/vdr-plugin-svdrpservice
+
+Package: svdrpservice-dev
+Architecture: all
+Depends: ${misc:Depends}
+Description: VDR svdrpservice plugin development files
+ Header files for VDR plugins that use the svdrpservice plugin.

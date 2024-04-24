@@ -1,0 +1,9 @@
+debian/epgsearchcmds.conf       etc/vdr/plugins/epgsearch/
+debian/epgsearchmenu.conf       etc/vdr/plugins/epgsearch/
+debian/epgsearchcats.conf       etc/vdr/plugins/epgsearch/
+
+debian/epg2taste.sh             usr/share/vdr-plugin-epgsearch/
+debian/rememberevent.sh         usr/share/vdr-plugin-epgsearch/
+
+conf/epgsearchupdmail.templ     etc/vdr/plugins/epgsearch/
+conf/epgsearchconflmail.templ   etc/vdr/plugins/epgsearch/
