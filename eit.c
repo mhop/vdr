@@ -120,7 +120,7 @@ cEIT::cEIT(cSectionSyncerHash &SectionSyncerHash, int Source, u_char Tid, const 
       else {
          // We have found an existing event, either through its event ID or its start time.
          pEvent->SetSeen();
-         uchar TableID = max(pEvent->TableID(), uchar(0x4E)); // for backwards compatibility, table ids less than 0x4E are treated as if they were "present"
+         uchar TableID = std::max(pEvent->TableID(), uchar(0x4E)); // for backwards compatibility, table ids less than 0x4E are treated as if they were "present"
          // If the new event has a higher table ID, let's skip it.
          // The lower the table ID, the more "current" the information.
          if (Tid > TableID)

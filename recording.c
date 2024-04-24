@@ -1088,7 +1088,7 @@ const char *cRecording::Title(char Delimiter, bool NewIndicator, int Level) cons
         s = name;
      cString Length("");
      if (NewIndicator) {
-        int Minutes = max(0, (LengthInSeconds() + 30) / 60);
+        int Minutes = std::max(0, (LengthInSeconds() + 30) / 60);
         Length = cString::sprintf("%c%d:%02d",
                    Delimiter,
                    Minutes / 60,
@@ -1800,7 +1800,7 @@ void cDirCopier::Action(void)
                     }
                  dsyslog("copying file '%s' to '%s'", *FileNameSrc, *FileNameDst);
                  if (!Buffer) {
-                    BufferSize = max(size_t(st.st_blksize * 10), size_t(BUFSIZ));
+                    BufferSize = std::max(size_t(st.st_blksize * 10), size_t(BUFSIZ));
                     Buffer = MALLOC(uchar, BufferSize);
                     if (!Buffer) {
                        esyslog("ERROR: out of memory");
@@ -2208,8 +2208,8 @@ void cMarks::Sort(void)
   for (cMark *m1 = First(); m1; m1 = Next(m1)) {
       for (cMark *m2 = Next(m1); m2; m2 = Next(m2)) {
           if (m2->Position() < m1->Position()) {
-             swap(m1->position, m2->position);
-             swap(m1->comment, m2->comment);
+		  std::swap(m1->position, m2->position);
+		  std::swap(m1->comment, m2->comment);
              }
           }
       }
@@ -3025,7 +3025,7 @@ cUnbufferedFile *cFileName::SetOffset(int Number, off_t Offset)
            }
         // found a non existing file suffix
         }
-     if (Open() >= 0) {
+     if (Open() != 0) {
         if (!record && Offset >= 0 && file && file->Seek(Offset, SEEK_SET) != Offset) {
            LOG_ERROR_STR(fileName);
            return NULL;

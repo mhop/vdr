@@ -380,7 +380,7 @@ void cSkinSTTNGDisplayChannel::Flush(void)
      if (present) {
         time_t t = time(NULL);
         if (t > present->StartTime())
-           seen = min(y4 - y3 - 1, int((y4 - y3) * double(t - present->StartTime()) / present->Duration()));
+           seen = std::min(y4 - y3 - 1, int((y4 - y3) * double(t - present->StartTime()) / present->Duration()));
         }
      if (seen != lastSeen) {
         osd->DrawRectangle(x1 + Gap, y3, x1 + Gap + ScrollWidth - 1, y4 - 1, Theme.Color(clrChannelTimebarRest));
@@ -510,9 +510,9 @@ void cSkinSTTNGDisplayMenu::DrawScrollbar(int Total, int Offset, int Shown, int 
      int yb = yt + Height;
      int st = yt + h + Gap;
      int sb = yb - h - Gap;
-     int th = max(int((sb - st) * double(Shown) / Total + 0.5), ScrollWidth);
-     int tt = min(int(st + (sb - st) * double(Offset) / Total + 0.5), sb - th);
-     int tb = min(tt + th, sb);
+     int th = std::max(int((sb - st) * double(Shown) / Total + 0.5), ScrollWidth);
+     int tt = std::min(int(st + (sb - st) * double(Offset) / Total + 0.5), sb - th);
+     int tb = std::min(tt + th, sb);
      osd->DrawRectangle(x5, st, x5 + ScrollWidth - 1, sb - 1, Theme.Color(clrMenuScrollbarTotal));
      osd->DrawRectangle(x5, tt, x5 + ScrollWidth - 1, tb - 1, Theme.Color(clrMenuScrollbarShown));
      osd->DrawRectangle(x5, yt, x6 - 1, yt + h - 1, frameColor);
@@ -806,7 +806,7 @@ cSkinSTTNGDisplayReplay::cSkinSTTNGDisplayReplay(bool ModeOnly)
   lastCurrentWidth = 0;
   cBitmap bm(play_xpm);
   x0 = 0;
-  x1 = max(lineHeight * 2, bm.Width());
+  x1 = std::max(lineHeight * 2, bm.Width());
   x2 = x1 + Roundness;
   x3 = x2 + Gap;
   x7 = cOsd::OsdWidth();
@@ -817,7 +817,7 @@ cSkinSTTNGDisplayReplay::cSkinSTTNGDisplayReplay(bool ModeOnly)
   y1 = lineHeight;
   y2 = y1 + Roundness;
   y3 = y2 + Gap;
-  y4 = y3 + max(lineHeight, bm.Height());
+  y4 = y3 + std::max(lineHeight, bm.Height());
   y5 = y4 + Gap;
   y6 = y5 + Roundness;
   y7 = y6 + font->Height();
@@ -1050,7 +1050,7 @@ cSkinSTTNGDisplayTracks::cSkinSTTNGDisplayTracks(const char *Title, int NumTrack
   currentIndex = -1;
   int ItemsWidth = font->Width(Title);
   for (int i = 0; i < NumTracks; i++)
-      ItemsWidth = max(ItemsWidth, font->Width(Tracks[i]));
+      ItemsWidth = std::max(ItemsWidth, font->Width(Tracks[i]));
   ItemsWidth += 2 * TextSpacing;
   x0 = 0;
   x1 = lineHeight / 2;

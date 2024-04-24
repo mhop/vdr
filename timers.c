@@ -430,7 +430,7 @@ bool cTimer::Matches(time_t t, bool Directly, int Margin) const
      stopTime  = SetTime(t0, end);
      }
   else {
-     time_t d = day ? max(day, t) : t;
+     time_t d = day ? std::max(day, t) : t;
      for (int i = -1; i <= 7; i++) {
          time_t t0 = IncDay(d, i);
          if (DayMatches(t0)) {
@@ -500,7 +500,7 @@ eTimerMatch cTimer::Matches(const cEvent *Event, int *Overlap) const
         else if (stopTime <= Event->StartTime() || Event->EndTime() <= startTime)
            overlap = 0;
         else
-           overlap = (min(stopTime, Event->EndTime()) - max(startTime, Event->StartTime())) * FULLMATCH / max(Event->Duration(), 1);
+           overlap = (std::min(stopTime, Event->EndTime()) - std::max(startTime, Event->StartTime())) * FULLMATCH / std::max(Event->Duration(), 1);
         }
      startTime = stopTime = 0;
      if (Overlap)
@@ -822,7 +822,7 @@ int cTimers::GetMaxPriority(void) const
   int n = -1;
   for (const cTimer *ti = First(); ti; ti = Next(ti)) {
       if (!ti->Remote() && ti->Recording())
-         n = max(n, ti->Priority());
+         n = std::max(n, ti->Priority());
       }
   return n;
 }

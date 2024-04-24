@@ -1173,7 +1173,7 @@ void cDvbSubtitleAssembler::Reset(void)
 bool cDvbSubtitleAssembler::Realloc(int Size)
 {
   if (Size > size) {
-     Size = max(Size, 2048);
+     Size = std::max(Size, 2048);
      if (uchar *NewBuffer = (uchar *)realloc(data, Size)) {
         size = Size;
         data = NewBuffer;
@@ -1516,7 +1516,7 @@ void cDvbSubtitleConverter::SetOsdData(void)
      osdDeltaX = osdDeltaY = 0;
      }
   else {
-     osdFactorX = osdFactorY = min(double(OsdWidth) / displayWidth, double(OsdHeight) / displayHeight);
+     osdFactorX = osdFactorY = std::min(double(OsdWidth) / displayWidth, double(OsdHeight) / displayHeight);
      osdDeltaX = (OsdWidth - displayWidth * osdFactorX) / 2;
      osdDeltaY = (OsdHeight - displayHeight * osdFactorY) / 2;
      }

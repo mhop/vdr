@@ -243,9 +243,9 @@ void cSkinClassicDisplayMenu::DrawScrollbar(int Total, int Offset, int Shown, in
      int yb = yt + Height;
      int st = yt;
      int sb = yb;
-     int th = max(int((sb - st) * double(Shown) / Total + 0.5), ScrollWidth);
-     int tt = min(int(st + (sb - st) * double(Offset) / Total + 0.5), sb - th);
-     int tb = min(tt + th, sb);
+     int th = std::max(int((sb - st) * double(Shown) / Total + 0.5), ScrollWidth);
+     int tt = std::min(int(st + (sb - st) * double(Offset) / Total + 0.5), sb - th);
+     int tb = std::min(tt + th, sb);
      int xl = x3 - ScrollWidth;
      osd->DrawRectangle(xl, st, x3 - 1, sb - 1, Theme.Color(clrMenuScrollbarTotal));
      osd->DrawRectangle(xl, tt, x3 - 1, tb - 1, Theme.Color(clrMenuScrollbarShown));
@@ -443,7 +443,7 @@ void cSkinClassicDisplayMenu::Flush(void)
      int w = font->Width(date);
      osd->DrawText(x3 - w - TextFrame, y0, date, Theme.Color(clrMenuDate), Theme.Color(clrMenuTitleBg), font, w);
      lastDate = date;
-     dateWidth = max(w + TextFrame, dateWidth);
+     dateWidth = std::max(w + TextFrame, dateWidth);
      }
   osd->Flush();
 }
@@ -638,7 +638,7 @@ cSkinClassicDisplayTracks::cSkinClassicDisplayTracks(const char *Title, int NumT
   currentIndex = -1;
   int ItemsWidth = font->Width(Title);
   for (int i = 0; i < NumTracks; i++)
-      ItemsWidth = max(ItemsWidth, font->Width(Tracks[i]));
+      ItemsWidth = std::max(ItemsWidth, font->Width(Tracks[i]));
   ItemsWidth += 2 * TextSpacing;
   x0 = 0;
   x1 = cOsd::OsdWidth();

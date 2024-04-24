@@ -881,7 +881,7 @@ void cDvbPlayer::SkipSeconds(int Seconds)
      int Index = ptsIndex.FindIndex(DeviceGetSTC());
      Empty();
      if (Index >= 0) {
-        Index = max(Index + SecondsToFrames(Seconds, framesPerSecond), 0);
+        Index = std::max(Index + SecondsToFrames(Seconds, framesPerSecond), 0);
         if (Index > 0)
            Index = index->GetNextIFrame(Index, false, NULL, NULL, NULL);
         if (Index >= 0)

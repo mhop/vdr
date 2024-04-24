@@ -228,7 +228,7 @@ eOSState cMenuEditNumItem::ProcessKey(eKeys Key)
 cMenuEditIntxItem::cMenuEditIntxItem(const char *Name, int *Value, int Min, int Max, int Factor, const char *NegString, const char *PosString)
 :cMenuEditIntItem(Name, Value, Min, Max)
 {
-  factor = ::max(Factor, 1);
+  factor = std::max(Factor, 1);
   negString = NegString;
   posString = PosString;
   Set();

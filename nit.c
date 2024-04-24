@@ -189,7 +189,7 @@ void cNitFilter::Process(u_short Pid, u_char Tid, const u_char *Data, int Length
                  static int CodeRates[] = { FEC_NONE, FEC_1_2, FEC_2_3, FEC_3_4, FEC_5_6, FEC_7_8, FEC_8_9, FEC_3_5, FEC_4_5, FEC_9_10, FEC_AUTO, FEC_AUTO, FEC_AUTO, FEC_AUTO, FEC_AUTO, FEC_NONE };
                  dtp.SetCoderateH(CodeRates[sd->getFecInner()]);
                  static int Modulations[] = { QPSK, QAM_16, QAM_32, QAM_64, QAM_128, QAM_256, QAM_AUTO };
-                 dtp.SetModulation(Modulations[min(sd->getModulation(), 6)]);
+                 dtp.SetModulation(Modulations[std::min(sd->getModulation(), 6)]);
                  int SymbolRate = BCD2INT(sd->getSymbolRate()) / 10;
                  dbgnit("    %s %d %d %d %d\n", *cSource::ToString(Source), Frequency, dtp.CoderateH(), dtp.Modulation(), SymbolRate);
                  if (Setup.UpdateChannels >= 5) {

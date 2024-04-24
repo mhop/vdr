@@ -936,7 +936,7 @@ int cDevice::Occupied(void) const
 void cDevice::SetOccupied(int Seconds)
 {
   if (Seconds >= 0)
-     occupiedTimeout = time(NULL) + min(Seconds, MAXOCCUPIEDTIMEOUT);
+     occupiedTimeout = time(NULL) + std::min(Seconds, MAXOCCUPIEDTIMEOUT);
 }
 
 bool cDevice::SetChannelDevice(const cChannel *Channel, bool LiveView)
@@ -1637,7 +1637,7 @@ int cDevice::Priority(void) const
   cMutexLock MutexLock(&mutexReceiver);
   for (int i = 0; i < MAXRECEIVERS; i++) {
       if (receiver[i])
-         priority = max(receiver[i]->priority, priority);
+         priority = std::max(receiver[i]->priority, priority);
       }
   return priority;
 }

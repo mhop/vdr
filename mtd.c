@@ -89,7 +89,7 @@ int cMtdHandler::Priority(void)
 {
   int p = IDLEPRIORITY;
   for (int i = 0; i < camSlots.Size(); i++)
-      p = max(p, camSlots[i]->Priority());
+      p = std::max(p, camSlots[i]->Priority());
   return p;
 }
 

@@ -72,7 +72,7 @@ cCondWait::~cCondWait()
 void cCondWait::SleepMs(int TimeoutMs)
 {
   cCondWait w;
-  w.Wait(max(TimeoutMs, 3)); // making sure the time is >2ms to avoid a possible busy wait
+  w.Wait(std::max(TimeoutMs, 3)); // making sure the time is >2ms to avoid a possible busy wait
 }
 
 bool cCondWait::Wait(int TimeoutMs)
@@ -521,7 +521,7 @@ void cBackTrace::BackTrace(cStringList &StringList, int Level, bool Mangled)
   void *b[BT_BUF_SIZE];
   int n = backtrace(b, BT_BUF_SIZE);
   if (char **s = backtrace_symbols(b, n)) {
-     for (int i = max(Level, 0) + 1; i < n; i++) // 1 is the call to this function itself
+     for (int i = std::max(Level, 0) + 1; i < n; i++) // 1 is the call to this function itself
          StringList.Append(strdup(Mangled ? s[i] : *Demangle(s[i])));
      free(s);
      }
@@ -542,7 +542,7 @@ void cBackTrace::BackTrace(FILE *f, int Level, bool Mangled)
 cString cBackTrace::GetCaller(int Level, bool Mangled)
 {
   cString Caller;
-  Level = max(Level, 0) + 1; // 1 is the call to this function itself
+  Level = std::max(Level, 0) + 1; // 1 is the call to this function itself
   void *b[BT_BUF_SIZE];
   int n = backtrace(b, BT_BUF_SIZE);
   if (char **s = backtrace_symbols(b, n)) {

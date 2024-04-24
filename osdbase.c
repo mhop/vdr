@@ -254,7 +254,7 @@ void cOsdMenu::Display(void)
          }
      if (current < 0)
         current = 0; // just for safety - there HAS to be a current item!
-     first = max(0, min(first, max(0, count - displayMenuItems))); // in case the menu size has changed
+     first = std::max(0, std::min(first, std::max(0, count - displayMenuItems))); // in case the menu size has changed
      if (current - first >= displayMenuItems || current < first) {
         first = current - displayMenuItems / 2;
         if (first + displayMenuItems > count)
@@ -283,7 +283,7 @@ void cOsdMenu::SetCurrent(cOsdItem *Item)
 {
   current = Item ? Item->Index() : -1;
   if (current >= 0 && lastOffset >= 0)
-     first = max(0, current - lastOffset);
+     first = std::max(0, current - lastOffset);
   lastOffset = -1;
 }
 
@@ -371,11 +371,11 @@ void cOsdMenu::CursorUp(void)
      DisplayCurrent(false);
   current = tmpCurrent;
   if (current < first) {
-     first = Setup.MenuScrollPage ? max(0, current - displayMenuItems + 1) : current;
+     first = Setup.MenuScrollPage ? std::max(0, current - displayMenuItems + 1) : current;
      Display();
      }
   else if (current > lastOnScreen) {
-     first = max(0, current - displayMenuItems + 1);
+     first = std::max(0, current - displayMenuItems + 1);
      Display();
      }
   else
@@ -410,9 +410,9 @@ void cOsdMenu::CursorDown(void)
      DisplayCurrent(false);
   current = tmpCurrent;
   if (current > lastOnScreen) {
-     first = Setup.MenuScrollPage ? current : max(0, current - displayMenuItems + 1);
+     first = Setup.MenuScrollPage ? current : std::max(0, current - displayMenuItems + 1);
      if (first + displayMenuItems > last)
-        first = max(0, last - displayMenuItems + 1);
+        first = std::max(0, last - displayMenuItems + 1);
      Display();
      }
   else if (current < first) {
@@ -469,7 +469,7 @@ void cOsdMenu::PageDown(void)
   if (current > last)
      current = last;
   if (first + displayMenuItems > last)
-     first = max(0, last - displayMenuItems + 1);
+     first = std::max(0, last - displayMenuItems + 1);
   int tmpCurrent = current;
   while (!SelectableItem(tmpCurrent) && ++tmpCurrent <= last)
         ;

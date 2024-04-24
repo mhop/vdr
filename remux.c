@@ -1055,7 +1055,7 @@ void cTsToPes::PutTs(const uchar *Data, int Length)
      return; // skip everything before the first payload start
   Length = TsGetPayload(&Data);
   if (length + Length > size) {
-     int NewSize = max(KILOBYTE(2), length + Length);
+     int NewSize = std::max(KILOBYTE(2), length + Length);
      if (uchar *NewData = (uchar *)realloc(data, NewSize)) {
         data = NewData;
         size = NewSize;
@@ -1092,7 +1092,7 @@ const uchar *cTsToPes::GetPes(int &Length)
               }
            memmove(p, data, 4);
            }
-        int l = min(length - offset, MAXPESLENGTH);
+        int l = std::min(length - offset, MAXPESLENGTH);
         offset += l;
         if (p != data) {
            l += 3;
@@ -1149,13 +1149,13 @@ void BlockDump(const char *Name, const u_char *Data, int Length)
 void TsDump(const char *Name, const u_char *Data, int Length)
 {
   printf("%s: %04X", Name, Length);
-  int n = min(Length, 20);
+  int n = std::min(Length, 20);
   for (int i = 0; i < n; i++)
       printf(" %02X", Data[i]);
   if (n < Length) {
      printf(" ...");
-     n = max(n, Length - 10);
-     for (n = max(n, Length - 10); n < Length; n++)
+     n = std::max(n, Length - 10);
+     for (n = std::max(n, Length - 10); n < Length; n++)
          printf(" %02X", Data[n]);
      }
   printf("\n");

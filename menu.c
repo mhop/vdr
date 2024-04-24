@@ -51,7 +51,7 @@
 #define MAXCHNAMWIDTH      16 // maximum number of characters of channels' short names shown in schedules menus
 
 #define CHNUMWIDTH  (numdigits(cChannels::MaxNumber()) + 1)
-#define CHNAMWIDTH  (min(MAXCHNAMWIDTH, cChannels::MaxShortChannelNameLength() + 1))
+#define CHNAMWIDTH  (std::min(MAXCHNAMWIDTH, cChannels::MaxShortChannelNameLength() + 1))
 
 // --- cMenuEditCaItem -------------------------------------------------------
 
@@ -3407,9 +3407,9 @@ cMenuSetupOSD::cMenuSetupOSD(void)
   fontOsdNames.Insert(strdup(DefaultFontOsd));
   fontSmlNames.Insert(strdup(DefaultFontSml));
   fontFixNames.Insert(strdup(DefaultFontFix));
-  fontOsdIndex = max(0, fontOsdNames.Find(Setup.FontOsd));
-  fontSmlIndex = max(0, fontSmlNames.Find(Setup.FontSml));
-  fontFixIndex = max(0, fontFixNames.Find(Setup.FontFix));
+  fontOsdIndex = std::max(0, fontOsdNames.Find(Setup.FontOsd));
+  fontSmlIndex = std::max(0, fontSmlNames.Find(Setup.FontSml));
+  fontFixIndex = std::max(0, fontFixNames.Find(Setup.FontFix));
   Set();
 }
 
@@ -5574,7 +5574,7 @@ int cAdaptiveSkipper::GetValue(eKeys Key)
         lastKey = kNone; // once the direction has changed, every further call halves the value
      }
   timeout.Set(Setup.AdaptiveSkipTimeout * 1000);
-  return max(currentValue, 1);
+  return std::max(currentValue, 1);
 }
 
 // --- cReplayControl --------------------------------------------------------
@@ -5833,7 +5833,7 @@ void cReplayControl::TimeSearchProcess(eKeys Key)
     case kRight: {
          int dir = ((Key == kRight || Key == kFastFwd) ? 1 : -1);
          if (dir > 0)
-            Seconds = min(Total - Current - STAY_SECONDS_OFF_END, Seconds);
+            Seconds = std::min(Total - Current - STAY_SECONDS_OFF_END, Seconds);
          SkipSeconds(Seconds * dir);
          timeSearchActive = false;
          }
@@ -5845,7 +5845,7 @@ void cReplayControl::TimeSearchProcess(eKeys Key)
     case kDown:
     case kOk:
          if (timeSearchPos > 0) {
-            Seconds = min(Total - STAY_SECONDS_OFF_END, Seconds);
+            Seconds = std::min(Total - STAY_SECONDS_OFF_END, Seconds);
             bool Still = Key == kDown || Key == kPause || Key == kOk;
             Goto(SecondsToFrames(Seconds, FramesPerSecond()), Still);
             }
@@ -5951,7 +5951,7 @@ void cReplayControl::MarkMove(int Frames, bool MarkRequired)
                  m = m2;
            // Don't skip the next mark:
            if ((m2 = marks.Next(m)) != NULL)
-              Frames = min(Frames, m2->Position() - m->Position() - 1);
+              Frames = std::min(Frames, m2->Position() - m->Position() - 1);
            }
         else {
            // Handle marks at the same offset:
@@ -5959,7 +5959,7 @@ void cReplayControl::MarkMove(int Frames, bool MarkRequired)
                  m = m2;
            // Don't skip the next mark:
            if ((m2 = marks.Prev(m)) != NULL)
-              Frames = -min(-Frames, m->Position() - m2->Position() - 1);
+              Frames = -std::min(-Frames, m->Position() - m2->Position() - 1);
            }
         int p = SkipFrames(Frames);
         m->SetPosition(p);

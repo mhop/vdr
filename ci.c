@@ -213,7 +213,7 @@ void cCaPidReceiver::Receive(const uchar *Data, int Length)
            }
         }
      else if (bufp && length > 0) {
-        int n = min(length, TS_SIZE - 4);
+        int n = std::min(length, TS_SIZE - 4);
         if (bufp + n - buffer <= int(sizeof(buffer))) {
            memcpy(bufp, Data + 4, n);
            bufp += n;
@@ -1593,7 +1593,7 @@ bool cCiMMI::SendAnswer(const char *Text)
   answer.id = Text ? AI_ANSWER : AI_CANCEL;
   int len = 0;
   if (Text) {
-     len = min(sizeof(answer.text), strlen(Text));
+     len = std::min(sizeof(answer.text), strlen(Text));
      memcpy(answer.text, Text, len);
      }
   SendData(AOT_ANSW, len + 1, (uint8_t *)&answer);

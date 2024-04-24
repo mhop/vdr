@@ -1046,7 +1046,7 @@ int cChannels::MaxChannelNameLength(void)
      LOCK_CHANNELS_READ;
      for (const cChannel *Channel = Channels->First(); Channel; Channel = Channels->Next(Channel)) {
          if (!Channel->GroupSep())
-            maxChannelNameLength = max(Utf8StrLen(Channel->Name()), maxChannelNameLength);
+            maxChannelNameLength = std::max(Utf8StrLen(Channel->Name()), maxChannelNameLength);
          }
      }
   return maxChannelNameLength;
@@ -1058,7 +1058,7 @@ int cChannels::MaxShortChannelNameLength(void)
      LOCK_CHANNELS_READ;
      for (const cChannel *Channel = Channels->First(); Channel; Channel = Channels->Next(Channel)) {
          if (!Channel->GroupSep())
-            maxShortChannelNameLength = max(Utf8StrLen(Channel->ShortName(true)), maxShortChannelNameLength);
+            maxShortChannelNameLength = std::max(Utf8StrLen(Channel->ShortName(true)), maxShortChannelNameLength);
          }
      }
   return maxShortChannelNameLength;

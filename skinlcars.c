@@ -245,18 +245,18 @@ static bool DrawDeviceData(cOsd *Osd, const cDevice *Device, int x0, int y0, int
      int x = x0;
      // Device number:
      cString Nr = itoa(Device->DeviceNumber() + 1);
-     int w = max(font->Width(Nr), y1 - y0);
+     int w = std::max(font->Width(Nr), y1 - y0);
      Osd->DrawText(x, y0, Nr, ColorFg, ColorBg, font, w, y1 - y0, taCenter);
      x += w;
      // Device type:
      Osd->DrawText(x, y0, DeviceType, ColorFg, ColorBg, TinyFont);
-     xs = max(xs, x + TinyFont->Width(DeviceType));
+     xs = std::max(xs, x + TinyFont->Width(DeviceType));
      LastDeviceType = DeviceType;
      // CAM:
      if (CamSlot) {
         cString s = cString::sprintf("CAM %d", CamSlot->MasterSlotNumber());
         Osd->DrawText(x, y1 - TinyFont->Height(), s, ColorFg, ColorBg, TinyFont);
-        xs = max(xs, x + TinyFont->Width(s));
+        xs = std::max(xs, x + TinyFont->Width(s));
         }
      LastCamSlot = CamSlot;
      return true;
@@ -268,7 +268,7 @@ static void DrawDeviceSignal(cOsd *Osd, const cDevice *Device, int x0, int y0, i
 {
   int SignalStrength = Device->SignalStrength();
   int SignalQuality = Device->SignalQuality();
-  int d = max((y1 - y0) / 10, 1);
+  int d = std::max((y1 - y0) / 10, 1);
   int x00 = x0 + d;
   int x01 = x1 - d;
   int h = (y1 - y0 - 3 * d) / 2;
@@ -311,14 +311,14 @@ static void DrawDevicePosition(cOsd *Osd, const cPositioner *Positioner, int x0,
   int Target = cPositioner::NormalizeAngle(HorizonLeft - Positioner->TargetLongitude());
   int d = (y1 - y0) / 2;
   int w = x1 - x0 - 2 * d;
-  int l = max(x0 + d, x0 + d + w * HardLimitLeft / HorizonDelta);
-  int r = min(x1 - d, x1 - d - w * HardLimitRight / HorizonDelta) - 1;
+  int l = std::max(x0 + d, x0 + d + w * HardLimitLeft / HorizonDelta);
+  int r = std::min(x1 - d, x1 - d - w * HardLimitRight / HorizonDelta) - 1;
   int c = constrain(x0 + d + w * Current / HorizonDelta, l, r);
   int t = constrain(x0 + d + w * Target / HorizonDelta, l, r);
   if (c == LastCurrent)
      return;
   if (c > t)
-     swap(c, t);
+     std::swap(c, t);
   tColor ColorRange, ColorMove;
   if (TwoColors) {
      ColorRange = Theme.Color(clrChannelFrameBg);
@@ -502,7 +502,7 @@ void cSkinLCARSDisplayChannel::DrawSeen(int Current, int Total)
 {
   if (lastCurrentPosition >= 0)
      return; // to not interfere with SetPositioner()
-  int Seen = (Total > 0) ? min(xc07 - xc06, int((xc07 - xc06) * double(Current) / Total)) : 0;
+  int Seen = (Total > 0) ? std::min(xc07 - xc06, int((xc07 - xc06) * double(Current) / Total)) : 0;
   if (initial || Seen != lastSeen) {
      int y0 = yc11 - ShowSeenExtent;
      int y1 = yc11 + lineHeight / 2 - Gap / 2;
@@ -541,7 +541,7 @@ void cSkinLCARSDisplayChannel::SetChannel(const cChannel *Channel, int Number)
            bmEncrypted.Width() - SymbolSpacing -
            bmDolbyDigital.Width() - SymbolSpacing -
            bmAudio.Width() - SymbolSpacing -
-           max(bmTeletext.Width(), bmRadio.Width()) - SymbolSpacing;
+           std::max(bmTeletext.Width(), bmRadio.Width()) - SymbolSpacing;
   osd->DrawRectangle(xi, yc00, xc13 - 1, yc01 - 1, frameColor);
   if (Channel && !Channel->GroupSep()) {
      bool rec = cRecordControls::Active();
@@ -1194,9 +1194,9 @@ void cSkinLCARSDisplayMenu::DrawScrollbar(int Total, int Offset, int Shown, bool
      }
   if (Total > 0 && Total > Shown) {
      int sw = x1 - x0;
-     int sh = max(int((tb - tt) * double(Shown) / Total + 0.5), sw);
-     int st = min(int(tt + (tb - tt) * double(Offset) / Total + 0.5), tb - sh);
-     int sb = min(st + sh, tb);
+     int sh = std::max(int((tb - tt) * double(Shown) / Total + 0.5), sw);
+     int st = std::min(int(tt + (tb - tt) * double(Offset) / Total + 0.5), tb - sh);
+     int sb = std::min(st + sh, tb);
      osd->DrawRectangle(x0, tt, x1 - 1, tb - 1, Theme.Color(clrMenuScrollbarTotal));
      osd->DrawRectangle(x0, st, x1 - 1, sb - 1, Theme.Color(clrMenuScrollbarShown));
      }
@@ -1230,7 +1230,7 @@ void cSkinLCARSDisplayMenu::DrawTimer(const cTimer *Timer, int y, bool MultiRec)
      Date = cString::sprintf("VPS %s", *Date);
   const cChannel *Channel = Timer->Channel();
   const cEvent *Event = Timer->Event();
-  int d = max(TextFrame / 2, 1);
+  int d = std::max(TextFrame / 2, 1);
   if (Channel) {
      osd->DrawText(xs00 + d, y, Channel->Name(), ColorFg, ColorBg, tinyFont, xs03 - xs00 - d);
      osd->DrawText(xs03 - tinyFont->Width(Date) - d, y, Date, ColorFg, ColorBg, tinyFont);
@@ -1513,7 +1513,7 @@ void cSkinLCARSDisplayMenu::DrawInfo(const cEvent *Event, bool WithTime)
 
 void cSkinLCARSDisplayMenu::DrawSeen(int Current, int Total)
 {
-  int Seen = (Total > 0) ? min(xm08 - xm02, int((xm08 - xm02) * double(Current) / Total)) : 0;
+  int Seen = (Total > 0) ? std::min(xm08 - xm02, int((xm08 - xm02) * double(Current) / Total)) : 0;
   if (initial || Seen != lastSeen) {
      int y0 = yc04 - ShowSeenExtent;
      int y1 = yc04 + lineHeight / 2 - Gap / 2;
@@ -1553,7 +1553,7 @@ void cSkinLCARSDisplayMenu::SetTitle(const char *Title)
 {
   if (MenuCategory() != mcMain) {
      const cFont *font = cFont::GetFont(fontOsd);
-     int w = min(font->Width(Title), xa07 - xa06 - Gap);
+     int w = std::min(font->Width(Title), xa07 - xa06 - Gap);
      osd->DrawRectangle(xa06, yt00, xa07 - w - Gap - 1, yt01 - 1, frameColor);
      osd->DrawText(xa07 - w - Gap, yt00, Title, Theme.Color(clrMenuTitle), Theme.Color(clrBackground), font, w + Gap, yt01 - yt00, taRight);
      }
@@ -1914,7 +1914,7 @@ void cSkinLCARSDisplayReplay::SetCurrent(const char *Current)
 {
   const cFont *font = cFont::GetFont(fontOsd);
   int w = font->Width(Current);
-  osd->DrawText(xp03, yp03 - lineHeight, Current, Theme.Color(clrReplayPosition), Theme.Color(clrBackground), font, max(lastCurrentWidth, w), 0, taLeft);
+  osd->DrawText(xp03, yp03 - lineHeight, Current, Theme.Color(clrReplayPosition), Theme.Color(clrBackground), font, std::max(lastCurrentWidth, w), 0, taLeft);
   lastCurrentWidth = w;
 }
 
@@ -1922,7 +1922,7 @@ void cSkinLCARSDisplayReplay::SetTotal(const char *Total)
 {
   const cFont *font = cFont::GetFont(fontOsd);
   int w = font->Width(Total);
-  osd->DrawText(xp13 - w, yp03 - lineHeight, Total, Theme.Color(clrReplayPosition), Theme.Color(clrBackground), font, max(lastTotalWidth, w), 0, taRight);
+  osd->DrawText(xp13 - w, yp03 - lineHeight, Total, Theme.Color(clrReplayPosition), Theme.Color(clrBackground), font, std::max(lastTotalWidth, w), 0, taRight);
   lastTotalWidth = w;
 }
 
@@ -2067,7 +2067,7 @@ cSkinLCARSDisplayTracks::cSkinLCARSDisplayTracks(const char *Title, int NumTrack
   xt03 = xt00 + 2 * lineHeight;
   int ItemsWidth = font->Width(Title) + xt03 - xt02;
   for (int i = 0; i < NumTracks; i++)
-      ItemsWidth = max(ItemsWidth, font->Width(Tracks[i]) + 2 * TextFrame);
+      ItemsWidth = std::max(ItemsWidth, font->Width(Tracks[i]) + 2 * TextFrame);
   xt04 = xt02 + ItemsWidth;
   xt05 = xt04 + Gap;
   xt06 = xt04 + lineHeight;

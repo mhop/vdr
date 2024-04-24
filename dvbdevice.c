@@ -1404,7 +1404,7 @@ int cDvbTuner::GetSignalQuality(void) const
               if (Unc > 0) {
                  int t = time(NULL) - lastUncChange - 2;
                  if (t > 0)
-                    Unc >>= min(t, int(sizeof(Unc) * 8 - 1));
+                    Unc >>= std::min(t, int(sizeof(Unc) * 8 - 1));
                  if (Unc == 0)
                     lastUncDelta = 0;
 #ifdef DEBUG_SIGNALQUALITY

@@ -114,7 +114,7 @@ int WriteAllOrNothing(int fd, const uchar *Data, int Length, int TimeoutMs, int 
 char *strcpyrealloc(char *dest, const char *src)
 {
   if (src) {
-     int l = max(dest ? strlen(dest) : 0, strlen(src)) + 1; // don't let the block get smaller!
+     int l = std::max(dest ? strlen(dest) : 0, strlen(src)) + 1; // don't let the block get smaller!
      dest = (char *)realloc(dest, l);
      if (dest)
         strcpy(dest, src);
@@ -995,7 +995,7 @@ const char *cCharSetConv::Convert(const char *From, char *To, size_t ToLength)
      size_t FromLength = strlen(From);
      char *ToPtr = To;
      if (!ToPtr) {
-        int NewLength = max(length, FromLength * 2); // some reserve to avoid later reallocations
+        int NewLength = std::max(length, FromLength * 2); // some reserve to avoid later reallocations
         if (char *NewBuffer = (char *)realloc(result, NewLength)) {
            length = NewLength;
            result = NewBuffer;
@@ -1155,7 +1155,7 @@ cString WeekDayName(int WeekDay)
      // TRANSLATORS: abbreviated weekdays, beginning with monday (must all be 3 letters!)
      const char *day = tr("MonTueWedThuFriSatSun");
      day += Utf8SymChars(day, WeekDay * 3);
-     strn0cpy(buffer, day, min(Utf8SymChars(day, 3) + 1, int(sizeof(buffer))));
+     strn0cpy(buffer, day, std::min(Utf8SymChars(day, 3) + 1, int(sizeof(buffer))));
      return buffer;
      }
   else
@@ -1865,13 +1865,13 @@ ssize_t cUnbufferedFile::Read(void *Data, size_t Size)
         cachedstart = curpos;
         cachedend = curpos;
         }
-     cachedstart = min(cachedstart, curpos);
+     cachedstart = std::min(cachedstart, curpos);
 #endif
      ssize_t bytesRead = safe_read(fd, Data, Size);
      if (bytesRead > 0) {
         curpos += bytesRead;
 #if USE_FADVISE_READ
-        cachedend = max(cachedend, curpos);
+        cachedend = std::max(cachedend, curpos);
 
         // Read ahead:
         // no jump? (allow small forward jump still inside readahead window).
@@ -1882,7 +1882,7 @@ ssize_t cUnbufferedFile::Read(void *Data, size_t Size)
            if (ahead - curpos < (off_t)(readahead / 2)) {
               posix_fadvise(fd, curpos, readahead, POSIX_FADV_WILLNEED);
               ahead = curpos + readahead;
-              cachedend = max(cachedend, ahead);
+              cachedend = std::max(cachedend, ahead);
               }
            if (readahead < Size * 32) { // automagically tune readahead size.
               readahead = Size * 32;
@@ -1918,10 +1918,10 @@ ssize_t cUnbufferedFile::Write(const void *Data, size_t Size)
      ssize_t bytesWritten = safe_write(fd, Data, Size);
 #if USE_FADVISE_WRITE
      if (bytesWritten > 0) {
-        begin = min(begin, curpos);
+        begin = std::min(begin, curpos);
         curpos += bytesWritten;
         written += bytesWritten;
-        lastpos = max(lastpos, curpos);
+        lastpos = std::max(lastpos, curpos);
         if (written > WRITE_BUFFER) {
            if (lastpos > begin) {
               // Now do three things:
@@ -1932,7 +1932,7 @@ ssize_t cUnbufferedFile::Write(const void *Data, size_t Size)
               //    last (partial) page might be skipped, writeback will start only after
               //    second call; the third call will still include this page and finally
               //    drop it from cache.
-              off_t headdrop = min(begin, off_t(WRITE_BUFFER * 2));
+              off_t headdrop = std::min(begin, off_t(WRITE_BUFFER * 2));
               posix_fadvise(fd, begin - headdrop, lastpos - begin + headdrop, POSIX_FADV_DONTNEED);
               }
            begin = lastpos = curpos;
@@ -1951,7 +1951,7 @@ ssize_t cUnbufferedFile::Write(const void *Data, size_t Size)
               // kind of write gathering enabled), but the syncs cause (io) load..
               // Uncomment the next line if you think you need them.
               //fdatasync(fd);
-              off_t headdrop = min(off_t(curpos - totwritten), off_t(totwritten * 2));
+              off_t headdrop = std::min(off_t(curpos - totwritten), off_t(totwritten * 2));
               posix_fadvise(fd, curpos - totwritten - headdrop, totwritten + headdrop, POSIX_FADV_DONTNEED);
               totwritten = 0;
               }
@@ -2312,7 +2312,7 @@ cDynamicBuffer::~cDynamicBuffer()
 bool cDynamicBuffer::Realloc(int NewSize)
 {
   if (size < NewSize) {
-     NewSize = max(NewSize, size ? size * 3 / 2 : initialSize); // increase size by at least 50%
+     NewSize = std::max(NewSize, size ? size * 3 / 2 : initialSize); // increase size by at least 50%
      if (uchar *NewBuffer = (uchar *)realloc(buffer, NewSize)) {
         buffer = NewBuffer;
         size = NewSize;

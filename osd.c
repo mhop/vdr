@@ -45,9 +45,9 @@ tColor RgbShade(tColor Color, double Factor)
   double f = fabs(constrain(Factor, -1.0, 1.0));
   double w = Factor > 0 ? f * 0xFF : 0;
   return (Color & 0xFF000000) |
-         (min(0xFF, int((1 - f) * ((Color >> 16) & 0xFF) + w + 0.5)) << 16) |
-         (min(0xFF, int((1 - f) * ((Color >>  8) & 0xFF) + w + 0.5)) <<  8) |
-         (min(0xFF, int((1 - f) * ( Color        & 0xFF) + w + 0.5))      );
+         (std::min(0xFF, int((1 - f) * ((Color >> 16) & 0xFF) + w + 0.5)) << 16) |
+         (std::min(0xFF, int((1 - f) * ((Color >>  8) & 0xFF) + w + 0.5)) <<  8) |
+         (std::min(0xFF, int((1 - f) * ( Color        & 0xFF) + w + 0.5))      );
 }
 
 #define USE_ALPHA_LUT
@@ -576,13 +576,13 @@ void cBitmap::DrawText(int x, int y, const char *s, tColor ColorFg, tColor Color
         if (Width) {
            if ((Alignment & taLeft) != 0) {
               if ((Alignment & taBorder) != 0)
-                 x += max(h / TEXT_ALIGN_BORDER, 1);
+                 x += std::max(h / TEXT_ALIGN_BORDER, 1);
               }
            else if ((Alignment & taRight) != 0) {
               if (w < Width)
                  x += Width - w;
               if ((Alignment & taBorder) != 0)
-                 x -= max(h / TEXT_ALIGN_BORDER, 1);
+                 x -= std::max(h / TEXT_ALIGN_BORDER, 1);
               }
            else { // taCentered
               if (w < Width)
@@ -617,10 +617,10 @@ void cBitmap::DrawRectangle(int x1, int y1, int x2, int y2, tColor Color)
      y1 -= y0;
      x2 -= x0;
      y2 -= y0;
-     x1 = max(x1, 0);
-     y1 = max(y1, 0);
-     x2 = min(x2, width - 1);
-     y2 = min(y2, height - 1);
+     x1 = std::max(x1, 0);
+     y1 = std::max(y1, 0);
+     x2 = std::min(x2, width - 1);
+     y2 = std::min(y2, height - 1);
      tIndex c = Index(Color);
      for (int y = y1; y <= y2; y++) {
          for (int x = x1; x <= x2; x++)
@@ -650,8 +650,8 @@ void cBitmap::DrawEllipse(int x1, int y1, int x2, int y2, tColor Color, int Quad
     case 8:          cy = y1; rx /= 2; break;
     default: ;
     }
-  int TwoASquare = max(1, 2 * rx * rx);
-  int TwoBSquare = max(1, 2 * ry * ry);
+  int TwoASquare = std::max(1, 2 * rx * rx);
+  int TwoBSquare = std::max(1, 2 * ry * ry);
   int x = rx;
   int y = 0;
   int XChange = ry * ry * (1 - 2 * rx);
@@ -839,8 +839,8 @@ cBitmap *cBitmap::Scaled(double FactorX, double FactorY, bool AntiAlias) const
 {
   // Fixed point scaling code based on www.inversereality.org/files/bitmapscaling.pdf
   // by deltener@mindtremors.com
-  int w = max(1, int(round(Width() * FactorX)));
-  int h = max(1, int(round(Height() * FactorY)));
+  int w = std::max(1, int(round(Width() * FactorX)));
+  int h = std::max(1, int(round(Height() * FactorY)));
   cBitmap *b = new cBitmap(w, h, Bpp(), X0(), Y0());
   int RatioX = (Width() << 16) / b->Width();
   int RatioY = (Height() << 16) / b->Height();
@@ -868,10 +868,10 @@ cBitmap *cBitmap::Scaled(double FactorX, double FactorY, bool AntiAlias) const
      int SourceY = 0;
      for (int y = 0; y < b->Height(); y++) {
          int SourceX = 0;
-         int sy = min(SourceY >> 16, Height() - 2);
+         int sy = std::min(SourceY >> 16, Height() - 2);
          uint8_t BlendY = 0xFF - ((SourceY >> 8) & 0xFF);
          for (int x = 0; x < b->Width(); x++) {
-             int sx = min(SourceX >> 16, Width() - 2);
+             int sx = std::min(SourceX >> 16, Width() - 2);
              uint8_t BlendX = 0xFF - ((SourceX >> 8) & 0xFF);
              tColor c1 = b->Blend(GetColor(sx, sy),     GetColor(sx + 1, sy),     BlendX);
              tColor c2 = b->Blend(GetColor(sx, sy + 1), GetColor(sx + 1, sy + 1), BlendX);
@@ -923,10 +923,10 @@ cRect cRect::Intersected(const cRect &Rect) const
 {
   cRect r;
   if (!IsEmpty() && !Rect.IsEmpty()) {
-     r.SetLeft(max(Left(), Rect.Left()));
-     r.SetTop(max(Top(), Rect.Top()));
-     r.SetRight(min(Right(), Rect.Right()));
-     r.SetBottom(min(Bottom(), Rect.Bottom()));
+     r.SetLeft(std::max(Left(), Rect.Left()));
+     r.SetTop(std::max(Top(), Rect.Top()));
+     r.SetRight(std::min(Right(), Rect.Right()));
+     r.SetBottom(std::min(Bottom(), Rect.Bottom()));
      }
   return r;
 }
@@ -938,10 +938,10 @@ void cRect::Combine(const cRect &Rect)
   if (Rect.IsEmpty())
      return;
   // must set right/bottom *before* top/left!
-  SetRight(max(Right(), Rect.Right()));
-  SetBottom(max(Bottom(), Rect.Bottom()));
-  SetLeft(min(Left(), Rect.Left()));
-  SetTop(min(Top(), Rect.Top()));
+  SetRight(std::max(Right(), Rect.Right()));
+  SetBottom(std::max(Bottom(), Rect.Bottom()));
+  SetLeft(std::min(Left(), Rect.Left()));
+  SetTop(std::min(Top(), Rect.Top()));
 }
 
 void cRect::Combine(const cPoint &Point)
@@ -949,10 +949,10 @@ void cRect::Combine(const cPoint &Point)
   if (IsEmpty())
      Set(Point.X(), Point.Y(), 1, 1);
   // must set right/bottom *before* top/left!
-  SetRight(max(Right(), Point.X()));
-  SetBottom(max(Bottom(), Point.Y()));
-  SetLeft(min(Left(), Point.X()));
-  SetTop(min(Top(), Point.Y()));
+  SetRight(std::max(Right(), Point.X()));
+  SetBottom(std::max(Bottom(), Point.Y()));
+  SetLeft(std::min(Left(), Point.X()));
+  SetTop(std::min(Top(), Point.Y()));
 }
 
 // --- cPixmap ---------------------------------------------------------------
@@ -1318,13 +1318,13 @@ void cPixmapMemory::DrawText(const cPoint &Point, const char *s, tColor ColorFg,
      if (Width) {
         if ((Alignment & taLeft) != 0) {
            if ((Alignment & taBorder) != 0)
-              x += max(h / TEXT_ALIGN_BORDER, 1);
+              x += std::max(h / TEXT_ALIGN_BORDER, 1);
            }
         else if ((Alignment & taRight) != 0) {
            if (w < Width)
               x += Width - w;
            if ((Alignment & taBorder) != 0)
-              x -= max(h / TEXT_ALIGN_BORDER, 1);
+              x -= std::max(h / TEXT_ALIGN_BORDER, 1);
            }
         else { // taCentered
            if (w < Width)
@@ -1402,8 +1402,8 @@ void cPixmapMemory::DrawEllipse(const cRect &Rect, tColor Color, int Quadrants)
     case 8:          cy = y1; rx /= 2; break;
     default: ;
     }
-  int TwoASquare = max(1, 2 * rx * rx);
-  int TwoBSquare = max(1, 2 * ry * ry);
+  int TwoASquare = std::max(1, 2 * rx * rx);
+  int TwoBSquare = std::max(1, 2 * ry * ry);
   int x = rx;
   int y = 0;
   int XChange = ry * ry * (1 - 2 * rx);
@@ -1853,8 +1853,8 @@ eOsdError cOsd::SetAreas(const tArea *Areas, int NumAreas)
      else {
         for (int i = 0; i < NumAreas; i++) {
             bitmaps[numBitmaps++] = new cBitmap(Areas[i].Width(), Areas[i].Height(), Areas[i].bpp, Areas[i].x1, Areas[i].y1);
-            width = max(width, Areas[i].x2 + 1);
-            height = max(height, Areas[i].y2 + 1);
+            width = std::max(width, Areas[i].x2 + 1);
+            height = std::max(height, Areas[i].y2 + 1);
             }
         }
      }
@@ -2044,15 +2044,15 @@ void cOsdProvider::UpdateOsdSize(bool Force)
   if (Width != oldWidth || Height != oldHeight || !DoubleEqual(Aspect, oldAspect) || Force) {
      Setup.OSDLeft = int(round(Width * Setup.OSDLeftP));
      Setup.OSDTop = int(round(Height * Setup.OSDTopP));
-     Setup.OSDWidth = min(Width - Setup.OSDLeft, int(round(Width * Setup.OSDWidthP))) & ~0x07; // OSD width must be a multiple of 8
-     Setup.OSDHeight = min(Height - Setup.OSDTop, int(round(Height * Setup.OSDHeightP)));
+     Setup.OSDWidth = std::min(Width - Setup.OSDLeft, int(round(Width * Setup.OSDWidthP))) & ~0x07; // OSD width must be a multiple of 8
+     Setup.OSDHeight = std::min(Height - Setup.OSDTop, int(round(Height * Setup.OSDHeightP)));
      Setup.OSDAspect = Aspect;
      Setup.FontOsdSize = int(round(Height * Setup.FontOsdSizeP));
      Setup.FontFixSize = int(round(Height * Setup.FontFixSizeP));
      Setup.FontSmlSize = int(round(Height * Setup.FontSmlSizeP));
      cFont::SetFont(fontOsd, Setup.FontOsd, Setup.FontOsdSize);
      cFont::SetFont(fontFix, Setup.FontFix, Setup.FontFixSize);
-     cFont::SetFont(fontSml, Setup.FontSml, min(Setup.FontSmlSize, Setup.FontOsdSize));
+     cFont::SetFont(fontSml, Setup.FontSml, std::min(Setup.FontSmlSize, Setup.FontOsdSize));
      oldWidth = Width;
      oldHeight = Height;
      oldAspect = Aspect;
@@ -2157,7 +2157,7 @@ void cTextScroller::Set(cOsd *Osd, int Left, int Top, int Width, int Height, con
   colorBg = ColorBg;
   offset = 0;
   textWrapper.Set(Text, Font, Width);
-  shown = min(Total(), height / font->Height());
+  shown = std::min(Total(), height / font->Height());
   height = shown * font->Height(); // sets height to the actually used height, which may be less than Height
   DrawText();
 }

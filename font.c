@@ -417,7 +417,7 @@ const cFont *cFont::GetFont(eDvbFont Font)
   if (!fonts[Font]) {
      switch (Font) {
        case fontOsd: SetFont(Font, Setup.FontOsd, Setup.FontOsdSize); break;
-       case fontSml: SetFont(Font, Setup.FontSml, min(Setup.FontSmlSize, Setup.FontOsdSize)); break;
+       case fontSml: SetFont(Font, Setup.FontSml, std::min(Setup.FontSmlSize, Setup.FontOsdSize)); break;
        case fontFix: SetFont(Font, Setup.FontFix, Setup.FontFixSize); break;
        default: esyslog("ERROR: unknown Font %d (%s %d)", Font, __FUNCTION__, __LINE__);
        }

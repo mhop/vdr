@@ -66,7 +66,7 @@ cDiseqcPositioner::cDiseqcPositioner(void)
 void cDiseqcPositioner::SendDiseqc(uint8_t *Codes, int NumCodes)
 {
   struct dvb_diseqc_master_cmd cmd;
-  NumCodes = min(NumCodes, int(sizeof(cmd.msg) - 2));
+  NumCodes = std::min(NumCodes, int(sizeof(cmd.msg) - 2));
   cmd.msg_len = 0;
   cmd.msg[cmd.msg_len++] = 0xE0;
   cmd.msg[cmd.msg_len++] = 0x31;
@@ -86,7 +86,7 @@ void cDiseqcPositioner::Step(ePositionerDirection Direction, uint Steps)
   if (Steps == 0)
      return;
   uint8_t Code[] = { uint8_t(Direction == pdLeft ? 0x68 : 0x69), 0xFF };
-  Code[1] -= min(Steps, uint(0x7F)) - 1;
+  Code[1] -= std::min(Steps, uint(0x7F)) - 1;
   SendDiseqc(Code, 2);
 }
 
