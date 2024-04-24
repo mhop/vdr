@@ -1,0 +1,51 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 01_debian-defaults.dpatch by Tobias Grimm <tg@e-tobi.net>
+##
+## Thomas Günther <tom@toms-cafe.de>:
+##   - adapted to epgsearch-0.9.23.beta18
+##   - adapted to epgsearch-0.9.25.beta16
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Modifies some debian-specific default settings.
+
+@DPATCH@
+--- a/epgsearchsetup.c
++++ b/epgsearchsetup.c
+@@ -123,7 +123,7 @@
+     FavoritesMenuMode[3] = tr("before 'next'");
+ 
+     MailMethod[0] = "sendmail";
+-    MailMethod[1] = "sendEmail.pl";
++    MailMethod[1] = "sendEmail";
+ 
+     Setup();
+ }
+@@ -861,7 +861,7 @@
+     AddHelp(tr("Help$Specify the email address where notifications should be sent to."));
+ 
+     Add(new cMenuEditStraItem(tr("Mail method"), &data->mailViaScript, 2, MailMethod));
+-    AddHelp(tr("Help$Specify here the method to use when sending mails.\nYou can choose between\n - 'sendmail': requires a properly configured email system\n - 'SendEmail.pl': simple script for mail delivery"));
++    AddHelp(tr("Help$Specify here the method to use when sending mails.\nYou can choose between\n - 'sendmail': requires a properly configured email system\n - 'SendEmail': simple script for mail delivery"));
+ 
+     if (data->mailViaScript) {
+         cOsdItem* sep = new cOsdItem(tr("--- Email account ---"));
+--- a/mail.c
++++ b/mail.c
+@@ -40,7 +40,7 @@
+ extern bool isUTF8;
+ using namespace std;
+ 
+-string cMailNotifier::MailCmd = "sendEmail.pl";
++string cMailNotifier::MailCmd = "sendEmail";
+ 
+ // ----------------------
+ // cMailTimerNotification
+@@ -243,7 +243,7 @@
+ {
+     string mailCmd = MailCmd;
+     LogFile.Log(3, "starting mail script: %s with parameters: %s", mailCmd.c_str(), ScriptArgs.c_str());
+-    if (mailCmd == "sendEmail.pl") // beautify output for standard script
++    if (mailCmd == "sendEmail") // beautify output for standard script
+         ScriptArgs += " | cut -d\" \" -f 6-";
+ 
+     cCommand cmd;

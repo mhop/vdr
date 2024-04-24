@@ -1,0 +1,4 @@
+version=4
+https://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git/ .*/vdr-plugin-epgsearch-(.*).tar.gz
+
+http://winni.vdr-developer.org/epgsearch/downloads/ vdr-epgsearch-(.*)\.tgz
