@@ -1,0 +1,4 @@
+04_newplugin.patch:588683d61d591ea5dbeebb3b0633ae3a
+12_osdbase-maxitems.patch:4434132e6f13f61df215fc6585cad32e
+99_ncursesw-include.patch:bf4fe165b489f0814b6759b4086ab937
+skincurses-log-errors.patch:8b4cd88d0e489210b9bbbcfce8089493

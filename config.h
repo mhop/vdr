@@ -4,7 +4,7 @@
  * See the main source file 'vdr.c' for copyright information and
  * how to reach the author.
  *
- * $Id: config.h 4.16 2019/06/16 09:13:45 kls Exp $
+ * $Id: config.h 4.15.1.1 2019/06/16 09:13:45 kls Exp $
  */
 
 #ifndef __CONFIG_H

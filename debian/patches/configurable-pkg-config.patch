@@ -1,0 +1,149 @@
+--- a/Makefile
++++ b/Makefile
+@@ -10,6 +10,8 @@
+ 
+ # Compiler flags:
+ 
++PKG_CONFIG ?= pkg-config
++
+ CC       ?= gcc
+ CFLAGS   ?= -g -O3 -Wall
+ 
+@@ -19,8 +21,8 @@
+ CDEFINES  = -D_GNU_SOURCE
+ CDEFINES += -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
+ 
+-LIBS      = -ljpeg -lpthread -ldl -lcap -lrt $(shell pkg-config --libs freetype2 fontconfig)
+-INCLUDES ?= $(shell pkg-config --cflags freetype2 fontconfig)
++LIBS      = -ljpeg -lpthread -ldl -lcap -lrt $(shell $(PKG_CONFIG) --libs freetype2 fontconfig)
++INCLUDES ?= $(shell $(PKG_CONFIG) --cflags freetype2 fontconfig)
+ 
+ # Directories:
+ 
+@@ -99,14 +101,14 @@
+ DEFINES += -DVDR_USER=\"$(VDR_USER)\"
+ endif
+ ifdef BIDI
+-INCLUDES += $(shell pkg-config --cflags fribidi)
++INCLUDES += $(shell $(PKG_CONFIG) --cflags fribidi)
+ DEFINES += -DBIDI
+-LIBS += $(shell pkg-config --libs fribidi)
++LIBS += $(shell $(PKG_CONFIG) --libs fribidi)
+ endif
+ ifdef SDNOTIFY
+-INCLUDES += $(shell pkg-config --silence-errors --cflags libsystemd-daemon || pkg-config --cflags libsystemd)
++INCLUDES += $(shell $(PKG_CONFIG) --silence-errors --cflags libsystemd-daemon || $(PKG_CONFIG) --cflags libsystemd)
+ DEFINES += -DSDNOTIFY
+-LIBS += $(shell pkg-config --silence-errors --libs libsystemd-daemon || pkg-config --libs libsystemd)
++LIBS += $(shell $(PKG_CONFIG) --silence-errors --libs libsystemd-daemon || $(PKG_CONFIG) --libs libsystemd)
+ endif
+ 
+ LIRC_DEVICE ?= /var/run/lirc/lircd
+--- a/PLUGINS/src/epgtableid0/Makefile
++++ b/PLUGINS/src/epgtableid0/Makefile
+@@ -16,7 +16,8 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
++PKG_CONFIG ?= pkg-config
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." $(PKG_CONFIG) --variable=$(1) vdr))
+ LIBDIR = $(call PKGCFG,libdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+--- a/PLUGINS/src/hello/Makefile
++++ b/PLUGINS/src/hello/Makefile
+@@ -16,7 +16,8 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
++PKG_CONFIG ?= pkg-config
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." $(PKG_CONFIG) --variable=$(1) vdr))
+ LIBDIR = $(call PKGCFG,libdir)
+ LOCDIR = $(call PKGCFG,locdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+--- a/PLUGINS/src/osddemo/Makefile
++++ b/PLUGINS/src/osddemo/Makefile
+@@ -16,7 +16,8 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
++PKG_CONFIG ?= pkg-config
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." $(PKG_CONFIG) --variable=$(1) vdr))
+ LIBDIR = $(call PKGCFG,libdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+--- a/PLUGINS/src/pictures/Makefile
++++ b/PLUGINS/src/pictures/Makefile
+@@ -16,7 +16,8 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
++PKG_CONFIG ?= pkg-config
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." $(PKG_CONFIG) --variable=$(1) vdr))
+ LIBDIR = $(call PKGCFG,libdir)
+ LOCDIR = $(call PKGCFG,locdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+--- a/PLUGINS/src/servicedemo/Makefile
++++ b/PLUGINS/src/servicedemo/Makefile
+@@ -17,7 +17,8 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
++PKG_CONFIG ?= pkg-config
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." $(PKG_CONFIG) --variable=$(1) vdr))
+ LIBDIR = $(call PKGCFG,libdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+--- a/PLUGINS/src/skincurses/Makefile
++++ b/PLUGINS/src/skincurses/Makefile
+@@ -16,7 +16,8 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
++PKG_CONFIG ?= pkg-config
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." $(PKG_CONFIG) --variable=$(1) vdr))
+ LIBDIR = $(call PKGCFG,libdir)
+ LOCDIR = $(call PKGCFG,locdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+--- a/PLUGINS/src/status/Makefile
++++ b/PLUGINS/src/status/Makefile
+@@ -16,7 +16,8 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
++PKG_CONFIG ?= pkg-config
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." $(PKG_CONFIG) --variable=$(1) vdr))
+ LIBDIR = $(call PKGCFG,libdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+--- a/PLUGINS/src/svdrpdemo/Makefile
++++ b/PLUGINS/src/svdrpdemo/Makefile
+@@ -16,7 +16,8 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
++PKG_CONFIG ?= pkg-config
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." $(PKG_CONFIG) --variable=$(1) vdr))
+ LIBDIR = $(call PKGCFG,libdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+--- a/newplugin
++++ b/newplugin
+@@ -75,7 +75,8 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = \$(if \$(VDRDIR),\$(shell pkg-config --variable=\$(1) \$(VDRDIR)/vdr.pc),\$(shell PKG_CONFIG_PATH="\$\$PKG_CONFIG_PATH:../../.." pkg-config --variable=\$(1) vdr))
++PKG_CONFIG ?= pkg-config
++PKGCFG = \$(if \$(VDRDIR),\$(shell $(PKG_CONFIG) --variable=\$(1) \$(VDRDIR)/vdr.pc),\$(shell PKG_CONFIG_PATH="\$\$PKG_CONFIG_PATH:../../.." $(PKG_CONFIG) --variable=\$(1) vdr))
+ LIBDIR = \$(call PKGCFG,libdir)
+ LOCDIR = \$(call PKGCFG,locdir)
+ PLGCFG = \$(call PKGCFG,plgcfg)

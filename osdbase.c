@@ -345,6 +345,7 @@ bool cOsdMenu::SelectableItem(int idx)
 
 void cOsdMenu::CursorUp(void)
 {
+  displayMenuItems = displayMenu->MaxItems();
   int tmpCurrent = current;
   int lastOnScreen = first + displayMenuItems - 1;
   int last = Count() - 1;
@@ -383,6 +384,7 @@ void cOsdMenu::CursorUp(void)
 
 void cOsdMenu::CursorDown(void)
 {
+  displayMenuItems = displayMenu->MaxItems();
   int tmpCurrent = current;
   int lastOnScreen = first + displayMenuItems - 1;
   int last = Count() - 1;
@@ -423,6 +425,7 @@ void cOsdMenu::CursorDown(void)
 
 void cOsdMenu::PageUp(void)
 {
+  displayMenuItems = displayMenu->MaxItems();
   int oldCurrent = current;
   int oldFirst = first;
   current -= displayMenuItems;
@@ -457,6 +460,7 @@ void cOsdMenu::PageUp(void)
 
 void cOsdMenu::PageDown(void)
 {
+  displayMenuItems = displayMenu->MaxItems();
   int oldCurrent = current;
   int oldFirst = first;
   current += displayMenuItems;

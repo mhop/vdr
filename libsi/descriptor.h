@@ -6,7 +6,7 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
- *   $Id: descriptor.h 4.1 2019/03/15 16:12:09 kls Exp $
+ *   $Id: descriptor.h 4.0.1.1 2019/03/15 22:38:36 kls Exp $
  *                                                                         *
  ***************************************************************************/
 

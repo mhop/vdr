@@ -3,14 +3,15 @@
  *
  * See the README file for copyright information and how to reach the author.
  *
- * $Id: skincurses.c 4.4 2019/03/12 12:24:34 kls Exp $
+ * $Id: skincurses.c 4.3.1.1 2019/03/12 12:28:04 kls Exp $
  */
 
-#include <ncurses.h>
+#include <ncursesw/ncurses.h>
 #include <vdr/osd.h>
 #include <vdr/plugin.h>
 #include <vdr/skins.h>
 #include <vdr/videodir.h>
+#include <vdr/tools.h>
 
 static const char *VERSION        = "2.4.1";
 static const char *DESCRIPTION    = trNOOP("A text only skin");
@@ -841,6 +842,7 @@ bool cPluginSkinCurses::Initialize(void)
      ScOsdHeight = maxy - begy + 1;
      return true;
      }
+  esyslog("skincurses: unable to initialize curses screen");
   return false;
 }
 

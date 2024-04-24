@@ -11,6 +11,15 @@ RANLIB   ?= ranlib
 
 -include ../Make.config
 
+# Output control
+
+ifdef VERBOSE
+Q =
+else
+Q = @
+endif
+export Q
+
 ### The object files (add further files here):
 
 OBJS = util.o si.o section.o descriptor.o
@@ -19,7 +28,7 @@ OBJS = util.o si.o section.o descriptor.o
 
 %.o: %.c
 	@echo CC libsi/$@
-	@$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) $<
+	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
 
 ### Dependencies:
 

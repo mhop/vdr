@@ -4,7 +4,7 @@
  * See the main source file 'vdr.c' for copyright information and
  * how to reach the author.
  *
- * $Id: dvbci.h 1.1 2007/01/07 14:38:00 kls Exp $
+ * $Id: dvbci.h 4.0 2006/11/26 11:19:42 kls Exp $
  */
 
 #ifndef __DVBCI_H

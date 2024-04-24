@@ -1,0 +1,78 @@
+# Debconf translations for vdr.
+# Copyright (C) 2016 THE vdr'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the vdr package.
+# Adriano Rafael Gomes <adrianorg@debian.org>, 2016-2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vdr 2.2.0-6\n"
+"Report-Msgid-Bugs-To: vdr@packages.debian.org\n"
+"POT-Creation-Date: 2017-01-31 22:00+0100\n"
+"PO-Revision-Date: 2017-01-31 21:37-0200\n"
+"Last-Translator: Adriano Rafael Gomes <adrianorg@debian.org>\n"
+"Language-Team: Brazilian Portuguese <debian-l10n-portuguese@lists.debian."
+"org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Satellite"
+msgstr "Satélite"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Terrestrial"
+msgstr "Terrestre"
+
+#. Type: select
+#. Choices
+#: ../vdr.templates:1001
+msgid "Cable"
+msgstr "Cabo"
+
+#. Type: select
+#. Description
+#: ../vdr.templates:1002
+msgid "DVB card type:"
+msgstr "Tipo de placa DVB:"
+
+#. Type: select
+#. Description
+#: ../vdr.templates:1002
+msgid ""
+"VDR needs to know your DVB card type to work correctly. Using your "
+"selection, a channels.conf file will be installed to /var/lib/vdr.  You may "
+"have to change this file depending on your setup."
+msgstr ""
+"O VDR precisa saber o tipo da sua placa DVB para funcionar corretamente. "
+"Usando a sua seleção, um arquivo channels.conf será instalado em /var/lib/"
+"vdr. Você pode precisar modificar esse arquivo, dependendo da sua "
+"configuração."
+
+#. Type: boolean
+#. Description
+#: ../vdr.templates:2001
+msgid "Create /var/lib/video?"
+msgstr "Criar /var/lib/video?"
+
+#. Type: boolean
+#. Description
+#: ../vdr.templates:2001
+#| msgid ""
+#| "By default VDR is configured to use /var/lib/video to store recordings. "
+#| "You can either create this directory now, or change this behavior later  "
+#| "by modifying the VIDEO_DIR variable in /etc/default/vdr."
+msgid ""
+"By default VDR is configured to use /var/lib/video to store recordings. You "
+"can either create this directory now, or change this behavior later  by "
+"modifying the config file /etc/vdr/conf.d/00-vdr.conf."
+msgstr ""
+"Por padrão, o VDR é configurado para usar /var/lib/video para armazenar as "
+"gravações. Você pode criar esse diretório agora, ou mudar esse comportamento "
+"mais tarde, modificando o arquivo de configuração /etc/vdr/conf.d/00-vdr."
+"conf."

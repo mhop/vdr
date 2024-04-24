@@ -1,0 +1,38 @@
+Description: Fixes problems with text2skin skin enigma.
+Author: Andreas Brugger <brougs78@gmx.net>
+Origin: http://vdrportal.de/board/thread.php?postid=343665#post343665
+
+--- a/osdbase.c
++++ b/osdbase.c
+@@ -345,6 +345,7 @@
+ 
+ void cOsdMenu::CursorUp(void)
+ {
++  displayMenuItems = displayMenu->MaxItems();
+   int tmpCurrent = current;
+   int lastOnScreen = first + displayMenuItems - 1;
+   int last = Count() - 1;
+@@ -383,6 +384,7 @@
+ 
+ void cOsdMenu::CursorDown(void)
+ {
++  displayMenuItems = displayMenu->MaxItems();
+   int tmpCurrent = current;
+   int lastOnScreen = first + displayMenuItems - 1;
+   int last = Count() - 1;
+@@ -423,6 +425,7 @@
+ 
+ void cOsdMenu::PageUp(void)
+ {
++  displayMenuItems = displayMenu->MaxItems();
+   int oldCurrent = current;
+   int oldFirst = first;
+   current -= displayMenuItems;
+@@ -457,6 +460,7 @@
+ 
+ void cOsdMenu::PageDown(void)
+ {
++  displayMenuItems = displayMenu->MaxItems();
+   int oldCurrent = current;
+   int oldFirst = first;
+   current += displayMenuItems;

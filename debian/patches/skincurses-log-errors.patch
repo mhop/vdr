@@ -1,0 +1,21 @@
+Description: Log an error message when skincures can't initialize the screen
+Author: Tobias Grimm <etobi@debian.org>
+
+--- a/PLUGINS/src/skincurses/skincurses.c
++++ b/PLUGINS/src/skincurses/skincurses.c
+@@ -11,6 +11,7 @@
+ #include <vdr/plugin.h>
+ #include <vdr/skins.h>
+ #include <vdr/videodir.h>
++#include <vdr/tools.h>
+ 
+ static const char *VERSION        = "2.4.1";
+ static const char *DESCRIPTION    = trNOOP("A text only skin");
+@@ -841,6 +842,7 @@
+      ScOsdHeight = maxy - begy + 1;
+      return true;
+      }
++  esyslog("skincurses: unable to initialize curses screen");
+   return false;
+ }
+ 

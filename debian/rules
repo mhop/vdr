@@ -1,0 +1,51 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+-include /usr/share/dpkg/buildtools.mk
+
+PREFIX = /usr
+VIDEODIR = /var/lib/video
+LIBDIR = /usr/lib/vdr/plugins
+MAKE_OPTIONS = PREFIX=$(PREFIX) VIDEODIR=$(VIDEODIR) LIBDIR=$(LIBDIR) SDNOTIFY=1 VERBOSE=1
+
+%:
+	dh $@ --with bash-completion
+
+override_dh_auto_build:
+	dh_auto_build -- $(MAKE_OPTIONS)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -o debian/vdr-shutdown.wrapper debian/vdr-shutdown-wrapper.c
+	for file in $$(ls debian/dh-addon-vdrplugin/dh_*); do \
+		pod2man --section=1 --utf8 $$file $$file.1; \
+	done
+
+override_dh_auto_clean:
+	dh_auto_clean --no-parallel
+	rm -f debian/vdr-shutdown.wrapper
+	rm -f debian/dh-addon-vdrplugin/*.1
+
+override_dh_missing:
+	dh_missing --fail-missing -Xlibvdr-epgtableid0.so
+
+override_dh_auto_install:
+	dh_auto_install -- $(MAKE_OPTIONS)
+	mv debian/tmp/var/lib/vdr/channels.conf debian/tmp/var/lib/vdr/channels.conf.sat
+
+override_dh_install:
+	dh_install
+	install -D -m 755 newplugin debian/vdr-dev/usr/bin/vdr-newplugin
+	echo -n "vdr:Provides=" >> debian/vdr.substvars
+	cat debian/abi-version >> debian/vdr.substvars
+	for example in hello osddemo pictures servicedemo skincurses status svdrpdemo; do \
+	    install -D PLUGINS/src/$$example/README debian/vdr-plugin-examples/usr/share/doc/vdr-plugin-examples/README.$$example; \
+	done
+	DH_AUTOSCRIPTDIR=debian/dh-addon-vdrplugin debian/dh-addon-vdrplugin/dh_vdrplugin_enable
+
+override_dh_installinit:
+	dh_installinit --error-handler true
+
+override_dh_installchangelogs:
+	dh_installchangelogs -pvdr HISTORY
+	dh_installchangelogs -pvdr-plugin-examples
+	dh_installchangelogs

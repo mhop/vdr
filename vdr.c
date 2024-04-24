@@ -22,7 +22,7 @@
  *
  * The project's page is at http://www.tvdr.de
  *
- * $Id: vdr.c 4.30 2019/05/23 09:48:35 kls Exp $
+ * $Id: vdr.c 4.25.1.5 2019/05/23 10:02:45 kls Exp $
  */
 
 #include <getopt.h>

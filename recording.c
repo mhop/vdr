@@ -4,7 +4,7 @@
  * See the main source file 'vdr.c' for copyright information and
  * how to reach the author.
  *
- * $Id: recording.c 4.27 2019/05/28 21:47:32 kls Exp $
+ * $Id: recording.c 4.22.1.4 2019/05/29 14:25:51 kls Exp $
  */
 
 #include "recording.h"

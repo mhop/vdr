@@ -4,7 +4,7 @@
  * See the main source file 'vdr.c' for copyright information and
  * how to reach the author.
  *
- * $Id: ci.c 4.26 2019/05/28 15:01:29 kls Exp $
+ * $Id: ci.c 4.21.1.5 2019/05/28 15:55:44 kls Exp $
  */
 
 #include "ci.h"

@@ -4,7 +4,7 @@
  * See the main source file 'vdr.c' for copyright information and
  * how to reach the author.
  *
- * $Id: device.h 4.13 2019/05/28 14:47:09 kls Exp $
+ * $Id: device.h 4.12.1.1 2019/05/28 15:55:44 kls Exp $
  */
 
 #ifndef __DEVICE_H

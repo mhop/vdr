@@ -1,0 +1,27 @@
+--- a/libsi/Makefile
++++ b/libsi/Makefile
+@@ -11,6 +11,15 @@
+ 
+ -include ../Make.config
+ 
++# Output control
++
++ifdef VERBOSE
++Q =
++else
++Q = @
++endif
++export Q
++
+ ### The object files (add further files here):
+ 
+ OBJS = util.o si.o section.o descriptor.o
+@@ -19,7 +28,7 @@
+ 
+ %.o: %.c
+ 	@echo CC libsi/$@
+-	@$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) $<
++	$(Q)$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+ 
+ ### Dependencies:
+ 
