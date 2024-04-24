@@ -3025,8 +3025,8 @@ cUnbufferedFile *cFileName::SetOffset(int Number, off_t Offset)
            }
         // found a non existing file suffix
         }
-     if (Open() >= 0) {
-        if (!record && Offset >= 0 && file && file->Seek(Offset, SEEK_SET) != Offset) {
+     if (Open()) {
+        if (!record && Offset >= 0 && file->Seek(Offset, SEEK_SET) != Offset) {
            LOG_ERROR_STR(fileName);
            return NULL;
            }
