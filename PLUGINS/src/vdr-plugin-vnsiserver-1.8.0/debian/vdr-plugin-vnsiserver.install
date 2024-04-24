@@ -1,0 +1,2 @@
+vnsiserver/allowed_hosts.conf etc/vdr/plugins/vnsiserver
+debian/vnsiserver.conf        etc/vdr/conf.avail/

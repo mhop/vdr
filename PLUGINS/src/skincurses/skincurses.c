@@ -311,9 +311,9 @@ void cSkinCursesDisplayMenu::DrawScrollbar(int Total, int Offset, int Shown, int
      int yb = yt + Height;
      int st = yt;
      int sb = yb;
-     int th = max(int((sb - st) * double(Shown) / Total + 0.5), 1);
-     int tt = min(int(st + (sb - st) * double(Offset) / Total + 0.5), sb - th);
-     int tb = min(tt + th, sb);
+     int th = std::max(int((sb - st) * double(Shown) / Total + 0.5), 1);
+     int tt = std::min(int(st + (sb - st) * double(Offset) / Total + 0.5), sb - th);
+     int tb = std::min(tt + th, sb);
      int xl = ScOsdWidth - 1;
      osd->DrawRectangle(xl, st, xl, sb - 1, clrWhite);
      osd->DrawRectangle(xl, tt, xl, tb - 1, clrCyan);
@@ -655,8 +655,8 @@ cSkinCursesDisplayTracks::cSkinCursesDisplayTracks(const char *Title, int NumTra
   currentIndex = -1;
   itemsWidth = Font.Width(Title);
   for (int i = 0; i < NumTracks; i++)
-      itemsWidth = max(itemsWidth, Font.Width(Tracks[i]));
-  itemsWidth = min(itemsWidth, ScOsdWidth);
+      itemsWidth = std::max(itemsWidth, Font.Width(Tracks[i]));
+  itemsWidth = std::min(itemsWidth, ScOsdWidth);
   osd = new cCursesOsd(0, 0);
   osd->DrawRectangle(0, 0, ScOsdWidth - 1, ScOsdHeight - 1, clrBackground);
   osd->DrawText(0, 0, Title, clrBlack, clrCyan, &Font, itemsWidth);

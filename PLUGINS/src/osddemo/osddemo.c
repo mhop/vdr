@@ -191,10 +191,10 @@ eOSState cLineGame::ProcessKey(eKeys Key)
   if (state == osUnknown) {
      const int d = 4;
      switch (Key & ~k_Repeat) {
-       case kUp:     y = max(0, y - d); break;
-       case kDown:   y = min(osd->Height() - d, y + d); break;
-       case kLeft:   x = max(0, x - d); break;
-       case kRight:  x = min(osd->Width() - d, x + d); break;
+       case kUp:     y = std::max(0, y - d); break;
+       case kDown:   y = std::min(osd->Height() - d, y + d); break;
+       case kLeft:   x = std::max(0, x - d); break;
+       case kRight:  x = std::min(osd->Width() - d, x + d); break;
        case kRed:    color = clrRed; break;
        case kGreen:  color = clrGreen; break;
        case kYellow: color = clrYellow; break;
@@ -295,7 +295,7 @@ void cTrueColorDemo::Action(void)
         bool Animated = false;
         uint64_t Now = cTimeMs::Now();
         if (FadeInPixmap) {
-           double t = min(double(Now - Start) / FadeTime, 1.0);
+           double t = std::min(double(Now - Start) / FadeTime, 1.0);
            int Alpha = t * ALPHA_OPAQUE;
            FadeInPixmap->SetAlpha(Alpha);
            if (t >= 1)
@@ -303,7 +303,7 @@ void cTrueColorDemo::Action(void)
            Animated = true;
            }
         if (FadeOutPixmap) {
-           double t = min(double(Now - Start) / FadeTime, 1.0);
+           double t = std::min(double(Now - Start) / FadeTime, 1.0);
            int Alpha = ALPHA_OPAQUE - t * ALPHA_OPAQUE;
            FadeOutPixmap->SetAlpha(Alpha);
            if (t >= 1)
@@ -311,7 +311,7 @@ void cTrueColorDemo::Action(void)
            Animated = true;
            }
         if (MovePixmap) {
-           double t = min(double(Now - Start) / MoveTime, 1.0);
+           double t = std::min(double(Now - Start) / MoveTime, 1.0);
            int x = MoveStart.X() + t * (MoveEnd.X() - MoveStart.X());
            int y = MoveStart.Y() + t * (MoveEnd.Y() - MoveStart.Y());
            cRect r = MovePixmap->ViewPort();
@@ -322,7 +322,7 @@ void cTrueColorDemo::Action(void)
            Animated = true;
            }
         if (TilePixmap) {
-           double t = min(double(Now - Start) / TileTime, 1.0);
+           double t = std::min(double(Now - Start) / TileTime, 1.0);
            int x = TileStart.X() + t * (TileEnd.X() - TileStart.X());
            int y = TileStart.Y() + t * (TileEnd.Y() - TileStart.Y());
            TilePixmap->SetDrawPortPoint(cPoint(x, y));
@@ -335,7 +335,7 @@ void cTrueColorDemo::Action(void)
         if (ScrollPixmap) {
            if (int(Now - Start) > ScrollWaitTime) {
               if (ScrollStartTime) {
-                 double t = min(double(Now - ScrollStartTime) / ScrollLineTime, 1.0);
+                 double t = std::min(double(Now - ScrollStartTime) / ScrollLineTime, 1.0);
                  int x = ScrollStart.X() + t * (ScrollEnd.X() - ScrollStart.X());
                  int y = ScrollStart.Y() + t * (ScrollEnd.Y() - ScrollStart.Y());
                  ScrollPixmap->SetDrawPortPoint(cPoint(x, y));
@@ -473,7 +473,7 @@ void cTrueColorDemo::Action(void)
                        const int Size = SmlFont->Width(Text) + 10;
                        const int NumDots = 12;
                        const int AnimFrames = NumDots;
-                       int Rows = min(osd->MaxPixmapSize().Height() / Size, AnimFrames);
+                       int Rows = std::min(osd->MaxPixmapSize().Height() / Size, AnimFrames);
                        int Cols = (AnimFrames + Rows - 1) / Rows;
                        // Temporarily using pixmap layer 0 to have the text alpha blended:
                        AnimPixmap = osd->CreatePixmap(0, cRect((osd->Width() - Size) / 2, StartLine, Size, Size), cRect(0, 0, Size * Cols, Size * Rows));
@@ -566,10 +566,10 @@ eOSState cTrueColorDemo::ProcessKey(eKeys Key)
      LOCK_THREAD;
      const int d = 80;
      switch (Key & ~k_Repeat) {
-       case kUp:     cursor.SetY(max(cursorLimits.Top(),    cursor.Y() - d)); clockwise = false; break;
-       case kDown:   cursor.SetY(min(cursorLimits.Bottom(), cursor.Y() + d)); clockwise = true; break;
-       case kLeft:   cursor.SetX(max(cursorLimits.Left(),   cursor.X() - d)); clockwise = false; break;
-       case kRight:  cursor.SetX(min(cursorLimits.Right(),  cursor.X() + d)); clockwise = true; break;
+	     case kUp:     cursor.SetY(std::max(cursorLimits.Top(),    cursor.Y() - d)); clockwise = false; break;
+	     case kDown:   cursor.SetY(std::min(cursorLimits.Bottom(), cursor.Y() + d)); clockwise = true; break;
+	     case kLeft:   cursor.SetX(std::max(cursorLimits.Left(),   cursor.X() - d)); clockwise = false; break;
+	     case kRight:  cursor.SetX(std::min(cursorLimits.Right(),  cursor.X() + d)); clockwise = true; break;
        case kRed:    if (destroyablePixmap) {
                         osd->DestroyPixmap(destroyablePixmap);
                         destroyablePixmap = NULL;
